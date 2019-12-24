@@ -26,8 +26,6 @@ public class MazeGenerator {
     public MazeGenerator(int[][] mazeCells, int[][] mazeVisitedCells) {
         mazeHeight = mazeCells[0].length - 1;
         mazeWidth = mazeCells.length - 1;
-
-
         visitedCells = mazeVisitedCells;
         mazeGrid = mazeCells;
 
@@ -35,12 +33,10 @@ public class MazeGenerator {
         z = 0;
         int startingColumn = rnd(mazeWidth);
 
-        // 190
         c = 1;
         visitedCells[startingColumn][1] = c;
         c++;
 
-        // 200
         column = startingColumn;
         row = 1;
 
@@ -485,9 +481,9 @@ public class MazeGenerator {
                     if (c == mazeWidth * mazeHeight + 1)
                         GOTO(1200);
                     else
-                        GOTO(970);
+                        GOTO(1010);
                     continue;
-                case 970:
+                case 1010:
                     q = 0;
                     GOTO(270);
                     continue;
@@ -506,10 +502,6 @@ public class MazeGenerator {
                         GOTO(1200);
                     else
                         GOTO(1010);
-                    continue;
-                case 1010:
-                    q = 0;
-                    GOTO(270);
                     continue;
                 case 1020:
                     visitedCells[column + 1][row] = c;
