@@ -403,7 +403,7 @@ public class MazeGenerator {
                     continue;
                 case 820:
                     if (z == 1)
-                        target = 870;
+                        target = 1020;
                     else
                         target = 830;
                     continue;
@@ -413,7 +413,7 @@ public class MazeGenerator {
                     continue;
                 case 840:
                     if (visitedCells[column][row + 1] != 0)
-                        target = 870;
+                        target = 1020;
                     else
                         target = 850;
                     continue;
@@ -427,10 +427,7 @@ public class MazeGenerator {
                     else if (x == 2)
                         target = 1090;
                     else
-                        target = 870;
-                    continue;
-                case 870:
-                    target = 1020;
+                        target = 1020;
                     continue;
                 case 880:
                     if (row != mazeHeight)
