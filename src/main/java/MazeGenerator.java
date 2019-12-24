@@ -52,6 +52,7 @@ public class MazeGenerator {
         mazeGrid[column][row] = 1;
         q = 0;
         moveToUpperLeftCornerOfMaze();
+        case260();
     }
 
     private static void case1170() {
@@ -613,31 +614,34 @@ public class MazeGenerator {
 
     private static void moveToNextColumnOfMaze() {
         column++;
-        case260();
     }
 
     private static void moveToNextRowOfMaze() {
         column = 1;
         row++;
-        case260();
     }
 
     private static void moveToUpperLeftCornerOfMaze() {
         column = 1;
         row = 1;
-        case260();
     }
 
     private static void case220() {
-        if (row != mazeHeight)
+        if (row != mazeHeight) {
             moveToNextRowOfMaze();
-        else
+            case260();
+        }
+        else {
             moveToUpperLeftCornerOfMaze();
+            case260();
+        }
     }
 
     private static void case210() {
-        if (column != mazeWidth)
+        if (column != mazeWidth) {
             moveToNextColumnOfMaze();
+            case260();
+        }
         else
             case220();
     }
