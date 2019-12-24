@@ -611,6 +611,34 @@ public class MazeGenerator {
         else
             case270();
     }
+    
+    private static void case220() {
+        if (!isLastRow()) {
+            moveToNextRowOfMaze();
+            case260();
+        }
+        else {
+            moveToUpperLeftCornerOfMaze();
+            case260();
+        }
+    }
+
+    private static void case210() {
+        if (!isLastColumn()) {
+            moveToNextColumnOfMaze();
+            case260();
+        }
+        else
+            case220();
+    }
+
+    private static boolean isLastColumn() {
+        return column == mazeWidth;
+    }
+
+    private static boolean isLastRow() {
+        return row == mazeHeight;
+    }
 
     private static void moveToNextColumnOfMaze() {
         column++;
@@ -624,30 +652,6 @@ public class MazeGenerator {
     private static void moveToUpperLeftCornerOfMaze() {
         column = 1;
         row = 1;
-    }
-
-    private static void case220() {
-        if (!isLastRow()) {
-            moveToNextRowOfMaze();
-            case260();
-        }
-        else {
-            moveToUpperLeftCornerOfMaze();
-            case260();
-        }
-    }
-
-    private static boolean isLastRow() {
-        return row == mazeHeight;
-    }
-
-    private static void case210() {
-        if (column != mazeWidth) {
-            moveToNextColumnOfMaze();
-            case260();
-        }
-        else
-            case220();
     }
 
 }
