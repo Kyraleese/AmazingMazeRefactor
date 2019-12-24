@@ -1,18 +1,16 @@
 import java.util.Random;
 
 public class Amazing {
-    static int target = 0;      // where GOTO goes
+    private static int target = 0;      // where GOTO goes
     public static Random random = new Random(0);
     static StringBuffer result = new StringBuffer();
 
-    public static void main(String[] args) {
-        String colsArg = System.getenv("cols");
-        int cols = colsArg == null ? 10 : Integer.parseInt(colsArg);
-        String rowsArg = System.getenv("rows");
-        int rows = rowsArg == null ? 10 : Integer.parseInt(rowsArg);
-        doit(cols, rows);
-        System.out.println(result);
-    }
+    private static int x;
+    private static int h;
+    private static int v;
+    private static int[][] wArray;
+    private static int[][] vArray;
+
 
     private static void clear() {
         result.setLength(0);
@@ -22,51 +20,83 @@ public class Amazing {
         result.append("\n");
     }
 
-    public static void print(String text) {
+    private static void print(String text) {
         result.append(text);
     }
 
-    public static int rnd(int count) {
+    private static int rnd(int count) {
         return (int) (count * random.nextFloat()) + 1;
     }
 
-    public static void GOTO(int lineno) {
+    private static void GOTO(int lineno) {
         target = lineno;
+    }
+
+    private static void displayMaze() {
+        print("Amazing - Copyright by Creative Computing, Morristown, NJ");
+        println();
+
+        if (h != 1 || v != 1) {
+            // 130:170
+            for (int i = 1; i <= h; i++) {
+                if (wArray[i][1] == 1)
+                    print("+  ");
+                else
+                    print("+--");
+            }
+            // 180
+            print("+");
+            println();
+
+            // 1200:
+            for (int j = 1; j <= v; j++) {
+                print("|");        // 1210
+
+                for (int i = 1; i <= h; i++) {
+                    if (vArray[i][j] >= 2)
+                        print("   ");  // 1240
+                    else
+                        print("  |");  // 1260
+                }
+
+                print(" ");   // 1280
+                println();
+
+                for (int i = 1; i <= h; i++) {
+                    if (vArray[i][j] == 0)
+                        print("+--");   // 1300, 1340
+                    else if (vArray[i][j] == 2)
+                        print("+--");  // 1310, 1340
+                    else
+                        print("+  "); // 1320
+                }
+
+                print("+");    // 1360
+                println();
+            }
+        }
     }
 
     public static void doit(int horizontal, int vertical) {
         clear();
-        print("Amazing - Copyright by Creative Computing, Morristown, NJ");
-        println();
 
-        int h = horizontal;
-        int v = vertical;
+        h = horizontal;
+        v = vertical;
         if (h == 1 || v == 1) return;
 
-        int[][] wArray = new int[h + 1][v + 1];
+        wArray = new int[h + 1][v + 1];
         for (int i = 0; i <= h; i++) {
             wArray[i] = new int[v + 1];
         }
 
-        int[][] vArray = new int[h + 1][v + 1];
+        vArray = new int[h + 1][v + 1];
         for (int i = 0; i <= h; i++) {
             vArray[i] = new int[v + 1];
         }
 
         int q = 0;
         int z = 0;
-        int x = rnd(h);
-
-        // 130:170
-        for (int i = 1; i <= h; i++) {
-            if (i == x)
-                print("+  ");
-            else
-                print("+--");
-        }
-        // 180
-        print("+");
-        println();
+        x = rnd(h);
 
         // 190
         int c = 1;
@@ -624,36 +654,12 @@ public class Amazing {
                     continue;
                 case 1200:
                     target = -1;
-                    continue;
             }
 
         }
 
-        // 1200:
-        for (int j = 1; j <= v; j++) {
-            print("|");        // 1210
+        displayMaze();
 
-            for (int i = 1; i <= h; i++) {
-                if (vArray[i][j] >= 2)
-                    print("   ");  // 1240
-                else
-                    print("  |");  // 1260
-            }
-
-            print(" ");   // 1280
-            println();
-
-            for (int i = 1; i <= h; i++) {
-                if (vArray[i][j] == 0)
-                    print("+--");   // 1300, 1340
-                else if (vArray[i][j] == 2)
-                    print("+--");  // 1310, 1340
-                else
-                    print("+  "); // 1320
-            }
-
-            print("+");    // 1360
-            println();
         }
-    }
+
 }
