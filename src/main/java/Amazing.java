@@ -77,6 +77,12 @@ public class Amazing {
         }
     }
 
+    public static void initializeCells(int[][] cellArray) {
+        for (int i = 0; i <= mazeWidth; i++) {
+            cellArray[i] = new int[mazeHeight + 1];
+        }
+    }
+
     public static void doit(int width, int height) {
         clear();
 
@@ -84,14 +90,10 @@ public class Amazing {
         mazeHeight = height;
         if (mazeWidth != 1 && mazeHeight != 1) {
             visitedCells = new int[mazeWidth + 1][mazeHeight + 1];
-            for (int i = 0; i <= mazeWidth; i++) {
-                visitedCells[i] = new int[mazeHeight + 1];
-            }
+            initializeCells(visitedCells);
 
             mazeCells = new int[mazeWidth + 1][mazeHeight + 1];
-            for (int i = 0; i <= mazeWidth; i++) {
-                mazeCells[i] = new int[mazeHeight + 1];
-            }
+            initializeCells(mazeCells);
 
             int q = 0;
             int z = 0;
