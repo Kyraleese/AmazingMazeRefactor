@@ -611,7 +611,7 @@ public class MazeGenerator {
             case270();
     }
 
-    private static void case250() {
+    private static void moveToNextColumnOfMaze() {
         column++;
         case260();
     }
@@ -637,7 +637,7 @@ public class MazeGenerator {
 
     private static void case210() {
         if (column != mazeWidth)
-            case250();
+            moveToNextColumnOfMaze();
         else
             case220();
     }
