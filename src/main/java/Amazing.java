@@ -6,10 +6,10 @@ public class Amazing {
     static StringBuffer result = new StringBuffer();
 
     private static int x;
-    private static int h;
-    private static int v;
-    private static int[][] wArray;
-    private static int[][] vArray;
+    private static int mazeWidth;
+    private static int mazeHeight;
+    private static int[][] visitedCells;
+    private static int[][] mazeCells;
 
 
     private static void clear() {
@@ -36,10 +36,10 @@ public class Amazing {
         print("Amazing - Copyright by Creative Computing, Morristown, NJ");
         println();
 
-        if (h != 1 || v != 1) {
+        if (mazeWidth != 1 && mazeHeight != 1) {
             // 130:170
-            for (int i = 1; i <= h; i++) {
-                if (wArray[i][1] == 1)
+            for (int i = 1; i <= mazeWidth; i++) {
+                if (visitedCells[i][1] == 1)
                     print("+  ");
                 else
                     print("+--");
@@ -49,11 +49,11 @@ public class Amazing {
             println();
 
             // 1200:
-            for (int j = 1; j <= v; j++) {
+            for (int j = 1; j <= mazeHeight; j++) {
                 print("|");        // 1210
 
-                for (int i = 1; i <= h; i++) {
-                    if (vArray[i][j] >= 2)
+                for (int i = 1; i <= mazeWidth; i++) {
+                    if (mazeCells[i][j] >= 2)
                         print("   ");  // 1240
                     else
                         print("  |");  // 1260
@@ -62,10 +62,10 @@ public class Amazing {
                 print(" ");   // 1280
                 println();
 
-                for (int i = 1; i <= h; i++) {
-                    if (vArray[i][j] == 0)
+                for (int i = 1; i <= mazeWidth; i++) {
+                    if (mazeCells[i][j] == 0)
                         print("+--");   // 1300, 1340
-                    else if (vArray[i][j] == 2)
+                    else if (mazeCells[i][j] == 2)
                         print("+--");  // 1310, 1340
                     else
                         print("+  "); // 1320
@@ -77,586 +77,586 @@ public class Amazing {
         }
     }
 
-    public static void doit(int horizontal, int vertical) {
+    public static void doit(int width, int height) {
         clear();
 
-        h = horizontal;
-        v = vertical;
-        if (h == 1 || v == 1) return;
-
-        wArray = new int[h + 1][v + 1];
-        for (int i = 0; i <= h; i++) {
-            wArray[i] = new int[v + 1];
-        }
-
-        vArray = new int[h + 1][v + 1];
-        for (int i = 0; i <= h; i++) {
-            vArray[i] = new int[v + 1];
-        }
-
-        int q = 0;
-        int z = 0;
-        x = rnd(h);
-
-        // 190
-        int c = 1;
-        wArray[x][1] = c;
-        c++;
-
-        // 200
-        int r = x;
-        int s = 1;
-        GOTO(270);
-
-        while (target != -1) {
-            switch (target) {
-                case 210:
-                    if (r != h)
-                        GOTO(250);
-                    else
-                        GOTO(220);
-                    continue;
-                case 220:
-                    if (s != v)
-                        GOTO(240);
-                    else
-                        GOTO(230);
-                    continue;
-                case 230:
-                    r = 1;
-                    s = 1;
-                    GOTO(260);
-                    continue;
-                case 240:
-                    r = 1;
-                    s++;
-                    GOTO(260);
-                    continue;
-                case 250:
-                    r++;
-                    GOTO(260);
-                    continue;
-                case 260:
-                    if (wArray[r][s] == 0)
-                        GOTO(210);
-                    else
-                        GOTO(270);
-                    continue;
-                case 270:
-                    if (r - 1 == 0)
-                        GOTO(600);
-                    else
-                        GOTO(280);
-                    continue;
-                case 280:
-                    if (wArray[r - 1][s] != 0)
-                        GOTO(600);
-                    else
-                        GOTO(290);
-                    continue;
-                case 290:
-                    if (s - 1 == 0)
-                        GOTO(430);
-                    else
-                        GOTO(300);
-                    continue;
-                case 300:
-                    if (wArray[r][s - 1] != 0)
-                        GOTO(430);
-                    else
-                        GOTO(310);
-                    continue;
-                case 310:
-                    if (r == h)
-                        GOTO(350);
-                    else
-                        GOTO(320);
-                    continue;
-                case 320:
-                    if (wArray[r + 1][s] != 0)
-                        GOTO(350);
-                    else
-                        GOTO(330);
-                    continue;
-                case 330:
-                    x = rnd(3);
-                    GOTO(340);
-                    continue;
-                case 340:
-                    if (x == 1)
-                        GOTO(940);
-                    else if (x == 2)
-                        GOTO(980);
-                    else if (x == 3)
-                        GOTO(1020);
-                    else
-                        GOTO(350);
-                    continue;
-                case 350:
-                    if (s != v)
-                        GOTO(380);
-                    else
-                        GOTO(360);
-                    continue;
-                case 360:
-                    if (z == 1)
-                        GOTO(410);
-                    else
-                        GOTO(370);
-                    continue;
-                case 370:
-                    q = 1;
-                    GOTO(390);
-                    continue;
-                case 380:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(410);
-                    else
-                        GOTO(390);
-                    continue;
-                case 390:
-                    x = rnd(3);
-                    GOTO(400);
-                    continue;
-                case 400:
-                    if (x == 1)
-                        GOTO(940);
-                    else if (x == 2)
-                        GOTO(980);
-                    else if (x == 3)
-                        GOTO(1090);
-                    else
-                        GOTO(410);
-                    continue;
-                case 410:
-                    x = rnd(2);
-                    GOTO(420);
-                    continue;
-                case 420:
-                    if (x == 1)
-                        GOTO(940);
-                    else if (x == 2)
-                        GOTO(980);
-                    else
-                        GOTO(430);
-                    continue;
-                case 430:
-                    if (r == h)
-                        GOTO(530);
-                    else
-                        GOTO(440);
-                    continue;
-                case 440:
-                    if (wArray[r + 1][s] != 0)
-                        GOTO(530);
-                    else
-                        GOTO(450);
-                    continue;
-                case 450:
-                    if (s != v)
-                        GOTO(480);
-                    else
-                        GOTO(460);
-                    continue;
-                case 460:
-                    if (z == 1)
-                        GOTO(510);
-                    else
-                        GOTO(470);
-                    continue;
-                case 470:
-                    q = 1;
-                    GOTO(490);
-                    continue;
-                case 480:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(510);
-                    else
-                        GOTO(490);
-                    continue;
-                case 490:
-                    x = rnd(3);
-                    GOTO(500);
-                    continue;
-                case 500:
-                    if (x == 1)
-                        GOTO(940);
-                    else if (x == 2)
-                        GOTO(1020);
-                    else if (x == 3)
-                        GOTO(1090);
-                    else
-                        GOTO(510);
-                    continue;
-                case 510:
-                    x = rnd(2);
-                    GOTO(520);
-                    continue;
-                case 520:
-                    if (x == 1)
-                        GOTO(940);
-                    else if (x == 2)
-                        GOTO(1020);
-                    else
-                        GOTO(530);
-                    continue;
-                case 530:
-                    if (s != v)
-                        GOTO(560);
-                    else
-                        GOTO(540);
-                    continue;
-                case 540:
-                    if (z == 1)
-                        GOTO(590);
-                    else
-                        GOTO(550);
-                    continue;
-                case 550:
-                    q = 1;
-                    GOTO(570);
-                    continue;
-                case 560:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(590);
-                    else
-                        GOTO(570);
-                    continue;
-                case 570:
-                    x = rnd(2);
-                    GOTO(580);
-                    continue;
-                case 580:
-                    if (x == 1)
-                        GOTO(940);
-                    else if (x == 2)
-                        GOTO(1090);
-                    else
-                        GOTO(590);
-                    continue;
-                case 590:
-                    GOTO(940);
-                    continue;
-                case 600:
-                    if (s - 1 == 0)
-                        GOTO(790);
-                    else
-                        GOTO(610);
-                    continue;
-                case 610:
-                    if (wArray[r][s - 1] != 0)
-                        GOTO(790);
-                    else
-                        GOTO(620);
-                    continue;
-                case 620:
-                    if (r == h)
-                        GOTO(720);
-                    else
-                        GOTO(630);
-                    continue;
-                case 630:
-                    if (wArray[r + 1][s] != 0)
-                        GOTO(720);
-                    else
-                        GOTO(640);
-                    continue;
-                case 640:
-                    if (s != v)
-                        GOTO(670);
-                    else
-                        GOTO(650);
-                    continue;
-                case 650:
-                    if (z == 1)
-                        GOTO(700);
-                    else
-                        GOTO(660);
-                    continue;
-                case 660:
-                    q = 1;
-                    GOTO(680);
-                    continue;
-                case 670:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(700);
-                    else
-                        GOTO(680);
-                    continue;
-                case 680:
-                    x = rnd(3);
-                    GOTO(690);
-                    continue;
-                case 690:
-                    if (x == 1)
-                        GOTO(980);
-                    else if (x == 2)
-                        GOTO(1020);
-                    else if (x == 3)
-                        GOTO(1090);
-                    else
-                        GOTO(700);
-                    continue;
-                case 700:
-                    x = rnd(2);
-                    GOTO(710);
-                    continue;
-                case 710:
-                    if (x == 1)
-                        GOTO(980);
-                    else if (x == 2)
-                        GOTO(1020);
-                    else
-                        GOTO(720);
-                    continue;
-                case 720:
-                    if (s != v)
-                        GOTO(750);
-                    else
-                        GOTO(730);
-                    continue;
-                case 730:
-                    if (z == 1)
-                        GOTO(780);
-                    else
-                        GOTO(740);
-                    continue;
-                case 740:
-                    q = 1;
-                    GOTO(760);
-                    continue;
-                case 750:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(780);
-                    else
-                        GOTO(760);
-                    continue;
-                case 760:
-                    x = rnd(2);
-                    GOTO(770);
-                    continue;
-                case 770:
-                    if (x == 1)
-                        GOTO(980);
-                    else if (x == 2)
-                        GOTO(1090);
-                    else
-                        GOTO(780);
-                    continue;
-                case 780:
-                    GOTO(980);
-                    continue;
-                case 790:
-                    if (r == h)
-                        GOTO(880);
-                    else
-                        GOTO(800);
-                    continue;
-                case 800:
-                    if (wArray[r + 1][s] != 0)
-                        GOTO(880);
-                    else
-                        GOTO(810);
-                    continue;
-                case 810:
-                    if (s != v)
-                        GOTO(840);
-                    else
-                        GOTO(820);
-                    continue;
-                case 820:
-                    if (z == 1)
-                        GOTO(870);
-                    else
-                        GOTO(830);
-                    continue;
-                case 830:
-                    q = 1;
-                    GOTO(990);
-                    continue;
-                case 840:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(870);
-                    else
-                        GOTO(850);
-                    continue;
-                case 850:
-                    x = rnd(2);
-                    GOTO(860);
-                    continue;
-                case 860:
-                    if (x == 1)
-                        GOTO(1020);
-                    else if (x == 2)
-                        GOTO(1090);
-                    else
-                        GOTO(870);
-                    continue;
-                case 870:
-                    GOTO(1020);
-                    continue;
-                case 880:
-                    if (s != v)
-                        GOTO(910);
-                    else
-                        GOTO(890);
-                    continue;
-                case 890:
-                    if (z == 1)
-                        GOTO(930);
-                    else
-                        GOTO(900);
-                    continue;
-                case 900:
-                    q = 1;
-                    GOTO(920);
-                    continue;
-                case 910:
-                    if (wArray[r][s + 1] != 0)
-                        GOTO(930);
-                    else
-                        GOTO(920);
-                    continue;
-                case 920:
-                    GOTO(1090);
-                    continue;
-                case 930:
-                    GOTO(1190);
-                    continue;
-                case 940:
-                    wArray[r - 1][s] = c;
-                    GOTO(950);
-                    continue;
-                case 950:
-                    c++;
-                    vArray[r - 1][s] = 2;
-                    r--;
-                    GOTO(960);
-                    continue;
-                case 960:
-                    if (c == h * v + 1)
-                        GOTO(1200);
-                    else
-                        GOTO(970);
-                    continue;
-                case 970:
-                    q = 0;
-                    GOTO(270);
-                    continue;
-                case 980:
-                    wArray[r][s - 1] = c;
-                    GOTO(990);
-                    continue;
-                case 990:
-                    c++;
-                    GOTO(1000);
-                    continue;
-                case 1000:
-                    vArray[r][s - 1] = 1;
-                    s--;
-                    if (c == h * v + 1)
-                        GOTO(1200);
-                    else
-                        GOTO(1010);
-                    continue;
-                case 1010:
-                    q = 0;
-                    GOTO(270);
-                    continue;
-                case 1020:
-                    wArray[r + 1][s] = c;
-                    GOTO(1030);
-                    continue;
-                case 1030:
-                    c++;
-                    if (vArray[r][s] == 0)
-                        GOTO(1050);
-                    else
-                        GOTO(1040);
-                    continue;
-                case 1040:
-                    vArray[r][s] = 3;
-                    GOTO(1060);
-                    continue;
-                case 1050:
-                    vArray[r][s] = 2;
-                    GOTO(1060);
-                    continue;
-                case 1060:
-                    r++;
-                    GOTO(1070);
-                    continue;
-                case 1070:
-                    if (c == h * v + 1)
-                        GOTO(1200);
-                    else
-                        GOTO(1080);
-                    continue;
-                case 1080:
-                    GOTO(600);
-                    continue;
-                case 1090:
-                    if (q == 1)
-                        GOTO(1150);
-                    else
-                        GOTO(1100);
-                    continue;
-                case 1100:
-                    wArray[r][s + 1] = c;
-                    c++;
-                    if (vArray[r][s] == 0)
-                        GOTO(1120);
-                    else
-                        GOTO(1110);
-                    continue;
-                case 1110:
-                    vArray[r][s] = 3;
-                    GOTO(1130);
-                    continue;
-                case 1120:
-                    vArray[r][s] = 1;
-                    GOTO(1130);
-                    continue;
-                case 1130:
-                    s++;
-                    if (c == v * h + 1)
-                        GOTO(1200);
-                    else
-                        GOTO(1140);
-                    continue;
-                case 1140:
-                    GOTO(270);
-                    continue;
-                case 1150:
-                    z = 1;
-                    GOTO(1160);
-                    continue;
-                case 1160:
-                    if (vArray[r][s] == 0)
-                        GOTO(1180);
-                    else
-                        GOTO(1170);
-                    continue;
-                case 1170:
-                    vArray[r][s] = 3;
-                    q = 0;
-                    GOTO(1190);
-                    continue;
-                case 1180:
-                    vArray[r][s] = 1;
-                    q = 0;
-                    r = 1;
-                    s = 1;
-                    GOTO(260);
-                    continue;
-                case 1190:
-                    GOTO(210);
-                    continue;
-                case 1200:
-                    target = -1;
+        mazeWidth = width;
+        mazeHeight = height;
+        if (mazeWidth != 1 && mazeHeight != 1) {
+            visitedCells = new int[mazeWidth + 1][mazeHeight + 1];
+            for (int i = 0; i <= mazeWidth; i++) {
+                visitedCells[i] = new int[mazeHeight + 1];
             }
 
-        }
+            mazeCells = new int[mazeWidth + 1][mazeHeight + 1];
+            for (int i = 0; i <= mazeWidth; i++) {
+                mazeCells[i] = new int[mazeHeight + 1];
+            }
+
+            int q = 0;
+            int z = 0;
+            x = rnd(mazeWidth);
+
+            // 190
+            int c = 1;
+            visitedCells[x][1] = c;
+            c++;
+
+            // 200
+            int r = x;
+            int s = 1;
+            GOTO(270);
+
+            while (target != -1) {
+                switch (target) {
+                    case 210:
+                        if (r != mazeWidth)
+                            GOTO(250);
+                        else
+                            GOTO(220);
+                        continue;
+                    case 220:
+                        if (s != mazeHeight)
+                            GOTO(240);
+                        else
+                            GOTO(230);
+                        continue;
+                    case 230:
+                        r = 1;
+                        s = 1;
+                        GOTO(260);
+                        continue;
+                    case 240:
+                        r = 1;
+                        s++;
+                        GOTO(260);
+                        continue;
+                    case 250:
+                        r++;
+                        GOTO(260);
+                        continue;
+                    case 260:
+                        if (visitedCells[r][s] == 0)
+                            GOTO(210);
+                        else
+                            GOTO(270);
+                        continue;
+                    case 270:
+                        if (r - 1 == 0)
+                            GOTO(600);
+                        else
+                            GOTO(280);
+                        continue;
+                    case 280:
+                        if (visitedCells[r - 1][s] != 0)
+                            GOTO(600);
+                        else
+                            GOTO(290);
+                        continue;
+                    case 290:
+                        if (s - 1 == 0)
+                            GOTO(430);
+                        else
+                            GOTO(300);
+                        continue;
+                    case 300:
+                        if (visitedCells[r][s - 1] != 0)
+                            GOTO(430);
+                        else
+                            GOTO(310);
+                        continue;
+                    case 310:
+                        if (r == mazeWidth)
+                            GOTO(350);
+                        else
+                            GOTO(320);
+                        continue;
+                    case 320:
+                        if (visitedCells[r + 1][s] != 0)
+                            GOTO(350);
+                        else
+                            GOTO(330);
+                        continue;
+                    case 330:
+                        x = rnd(3);
+                        GOTO(340);
+                        continue;
+                    case 340:
+                        if (x == 1)
+                            GOTO(940);
+                        else if (x == 2)
+                            GOTO(980);
+                        else if (x == 3)
+                            GOTO(1020);
+                        else
+                            GOTO(350);
+                        continue;
+                    case 350:
+                        if (s != mazeHeight)
+                            GOTO(380);
+                        else
+                            GOTO(360);
+                        continue;
+                    case 360:
+                        if (z == 1)
+                            GOTO(410);
+                        else
+                            GOTO(370);
+                        continue;
+                    case 370:
+                        q = 1;
+                        GOTO(390);
+                        continue;
+                    case 380:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(410);
+                        else
+                            GOTO(390);
+                        continue;
+                    case 390:
+                        x = rnd(3);
+                        GOTO(400);
+                        continue;
+                    case 400:
+                        if (x == 1)
+                            GOTO(940);
+                        else if (x == 2)
+                            GOTO(980);
+                        else if (x == 3)
+                            GOTO(1090);
+                        else
+                            GOTO(410);
+                        continue;
+                    case 410:
+                        x = rnd(2);
+                        GOTO(420);
+                        continue;
+                    case 420:
+                        if (x == 1)
+                            GOTO(940);
+                        else if (x == 2)
+                            GOTO(980);
+                        else
+                            GOTO(430);
+                        continue;
+                    case 430:
+                        if (r == mazeWidth)
+                            GOTO(530);
+                        else
+                            GOTO(440);
+                        continue;
+                    case 440:
+                        if (visitedCells[r + 1][s] != 0)
+                            GOTO(530);
+                        else
+                            GOTO(450);
+                        continue;
+                    case 450:
+                        if (s != mazeHeight)
+                            GOTO(480);
+                        else
+                            GOTO(460);
+                        continue;
+                    case 460:
+                        if (z == 1)
+                            GOTO(510);
+                        else
+                            GOTO(470);
+                        continue;
+                    case 470:
+                        q = 1;
+                        GOTO(490);
+                        continue;
+                    case 480:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(510);
+                        else
+                            GOTO(490);
+                        continue;
+                    case 490:
+                        x = rnd(3);
+                        GOTO(500);
+                        continue;
+                    case 500:
+                        if (x == 1)
+                            GOTO(940);
+                        else if (x == 2)
+                            GOTO(1020);
+                        else if (x == 3)
+                            GOTO(1090);
+                        else
+                            GOTO(510);
+                        continue;
+                    case 510:
+                        x = rnd(2);
+                        GOTO(520);
+                        continue;
+                    case 520:
+                        if (x == 1)
+                            GOTO(940);
+                        else if (x == 2)
+                            GOTO(1020);
+                        else
+                            GOTO(530);
+                        continue;
+                    case 530:
+                        if (s != mazeHeight)
+                            GOTO(560);
+                        else
+                            GOTO(540);
+                        continue;
+                    case 540:
+                        if (z == 1)
+                            GOTO(590);
+                        else
+                            GOTO(550);
+                        continue;
+                    case 550:
+                        q = 1;
+                        GOTO(570);
+                        continue;
+                    case 560:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(590);
+                        else
+                            GOTO(570);
+                        continue;
+                    case 570:
+                        x = rnd(2);
+                        GOTO(580);
+                        continue;
+                    case 580:
+                        if (x == 1)
+                            GOTO(940);
+                        else if (x == 2)
+                            GOTO(1090);
+                        else
+                            GOTO(590);
+                        continue;
+                    case 590:
+                        GOTO(940);
+                        continue;
+                    case 600:
+                        if (s - 1 == 0)
+                            GOTO(790);
+                        else
+                            GOTO(610);
+                        continue;
+                    case 610:
+                        if (visitedCells[r][s - 1] != 0)
+                            GOTO(790);
+                        else
+                            GOTO(620);
+                        continue;
+                    case 620:
+                        if (r == mazeWidth)
+                            GOTO(720);
+                        else
+                            GOTO(630);
+                        continue;
+                    case 630:
+                        if (visitedCells[r + 1][s] != 0)
+                            GOTO(720);
+                        else
+                            GOTO(640);
+                        continue;
+                    case 640:
+                        if (s != mazeHeight)
+                            GOTO(670);
+                        else
+                            GOTO(650);
+                        continue;
+                    case 650:
+                        if (z == 1)
+                            GOTO(700);
+                        else
+                            GOTO(660);
+                        continue;
+                    case 660:
+                        q = 1;
+                        GOTO(680);
+                        continue;
+                    case 670:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(700);
+                        else
+                            GOTO(680);
+                        continue;
+                    case 680:
+                        x = rnd(3);
+                        GOTO(690);
+                        continue;
+                    case 690:
+                        if (x == 1)
+                            GOTO(980);
+                        else if (x == 2)
+                            GOTO(1020);
+                        else if (x == 3)
+                            GOTO(1090);
+                        else
+                            GOTO(700);
+                        continue;
+                    case 700:
+                        x = rnd(2);
+                        GOTO(710);
+                        continue;
+                    case 710:
+                        if (x == 1)
+                            GOTO(980);
+                        else if (x == 2)
+                            GOTO(1020);
+                        else
+                            GOTO(720);
+                        continue;
+                    case 720:
+                        if (s != mazeHeight)
+                            GOTO(750);
+                        else
+                            GOTO(730);
+                        continue;
+                    case 730:
+                        if (z == 1)
+                            GOTO(780);
+                        else
+                            GOTO(740);
+                        continue;
+                    case 740:
+                        q = 1;
+                        GOTO(760);
+                        continue;
+                    case 750:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(780);
+                        else
+                            GOTO(760);
+                        continue;
+                    case 760:
+                        x = rnd(2);
+                        GOTO(770);
+                        continue;
+                    case 770:
+                        if (x == 1)
+                            GOTO(980);
+                        else if (x == 2)
+                            GOTO(1090);
+                        else
+                            GOTO(780);
+                        continue;
+                    case 780:
+                        GOTO(980);
+                        continue;
+                    case 790:
+                        if (r == mazeWidth)
+                            GOTO(880);
+                        else
+                            GOTO(800);
+                        continue;
+                    case 800:
+                        if (visitedCells[r + 1][s] != 0)
+                            GOTO(880);
+                        else
+                            GOTO(810);
+                        continue;
+                    case 810:
+                        if (s != mazeHeight)
+                            GOTO(840);
+                        else
+                            GOTO(820);
+                        continue;
+                    case 820:
+                        if (z == 1)
+                            GOTO(870);
+                        else
+                            GOTO(830);
+                        continue;
+                    case 830:
+                        q = 1;
+                        GOTO(990);
+                        continue;
+                    case 840:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(870);
+                        else
+                            GOTO(850);
+                        continue;
+                    case 850:
+                        x = rnd(2);
+                        GOTO(860);
+                        continue;
+                    case 860:
+                        if (x == 1)
+                            GOTO(1020);
+                        else if (x == 2)
+                            GOTO(1090);
+                        else
+                            GOTO(870);
+                        continue;
+                    case 870:
+                        GOTO(1020);
+                        continue;
+                    case 880:
+                        if (s != mazeHeight)
+                            GOTO(910);
+                        else
+                            GOTO(890);
+                        continue;
+                    case 890:
+                        if (z == 1)
+                            GOTO(930);
+                        else
+                            GOTO(900);
+                        continue;
+                    case 900:
+                        q = 1;
+                        GOTO(920);
+                        continue;
+                    case 910:
+                        if (visitedCells[r][s + 1] != 0)
+                            GOTO(930);
+                        else
+                            GOTO(920);
+                        continue;
+                    case 920:
+                        GOTO(1090);
+                        continue;
+                    case 930:
+                        GOTO(1190);
+                        continue;
+                    case 940:
+                        visitedCells[r - 1][s] = c;
+                        GOTO(950);
+                        continue;
+                    case 950:
+                        c++;
+                        mazeCells[r - 1][s] = 2;
+                        r--;
+                        GOTO(960);
+                        continue;
+                    case 960:
+                        if (c == mazeWidth * mazeHeight + 1)
+                            GOTO(1200);
+                        else
+                            GOTO(970);
+                        continue;
+                    case 970:
+                        q = 0;
+                        GOTO(270);
+                        continue;
+                    case 980:
+                        visitedCells[r][s - 1] = c;
+                        GOTO(990);
+                        continue;
+                    case 990:
+                        c++;
+                        GOTO(1000);
+                        continue;
+                    case 1000:
+                        mazeCells[r][s - 1] = 1;
+                        s--;
+                        if (c == mazeWidth * mazeHeight + 1)
+                            GOTO(1200);
+                        else
+                            GOTO(1010);
+                        continue;
+                    case 1010:
+                        q = 0;
+                        GOTO(270);
+                        continue;
+                    case 1020:
+                        visitedCells[r + 1][s] = c;
+                        GOTO(1030);
+                        continue;
+                    case 1030:
+                        c++;
+                        if (mazeCells[r][s] == 0)
+                            GOTO(1050);
+                        else
+                            GOTO(1040);
+                        continue;
+                    case 1040:
+                        mazeCells[r][s] = 3;
+                        GOTO(1060);
+                        continue;
+                    case 1050:
+                        mazeCells[r][s] = 2;
+                        GOTO(1060);
+                        continue;
+                    case 1060:
+                        r++;
+                        GOTO(1070);
+                        continue;
+                    case 1070:
+                        if (c == mazeWidth * mazeHeight + 1)
+                            GOTO(1200);
+                        else
+                            GOTO(1080);
+                        continue;
+                    case 1080:
+                        GOTO(600);
+                        continue;
+                    case 1090:
+                        if (q == 1)
+                            GOTO(1150);
+                        else
+                            GOTO(1100);
+                        continue;
+                    case 1100:
+                        visitedCells[r][s + 1] = c;
+                        c++;
+                        if (mazeCells[r][s] == 0)
+                            GOTO(1120);
+                        else
+                            GOTO(1110);
+                        continue;
+                    case 1110:
+                        mazeCells[r][s] = 3;
+                        GOTO(1130);
+                        continue;
+                    case 1120:
+                        mazeCells[r][s] = 1;
+                        GOTO(1130);
+                        continue;
+                    case 1130:
+                        s++;
+                        if (c == mazeHeight * mazeWidth + 1)
+                            GOTO(1200);
+                        else
+                            GOTO(1140);
+                        continue;
+                    case 1140:
+                        GOTO(270);
+                        continue;
+                    case 1150:
+                        z = 1;
+                        GOTO(1160);
+                        continue;
+                    case 1160:
+                        if (mazeCells[r][s] == 0)
+                            GOTO(1180);
+                        else
+                            GOTO(1170);
+                        continue;
+                    case 1170:
+                        mazeCells[r][s] = 3;
+                        q = 0;
+                        GOTO(1190);
+                        continue;
+                    case 1180:
+                        mazeCells[r][s] = 1;
+                        q = 0;
+                        r = 1;
+                        s = 1;
+                        GOTO(260);
+                        continue;
+                    case 1190:
+                        GOTO(210);
+                        continue;
+                    case 1200:
+                        target = -1;
+                }
+
+            }
+        };
 
         displayMaze();
 
