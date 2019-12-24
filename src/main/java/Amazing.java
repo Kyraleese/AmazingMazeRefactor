@@ -8,6 +8,11 @@ public class Amazing {
     private static int x;
     private static int mazeWidth;
     private static int mazeHeight;
+    private static int q;
+    private static int z;
+    private static int s;
+    private static int r;
+    private static int c;
     private static int[][] visitedCells;
     private static int[][] mazeCells;
 
@@ -77,10 +82,32 @@ public class Amazing {
         }
     }
 
-    public static void initializeCells(int[][] cellArray) {
+    private static void initializeCells(int[][] cellArray) {
         for (int i = 0; i <= mazeWidth; i++) {
             cellArray[i] = new int[mazeHeight + 1];
         }
+    }
+
+    private static void initialize() {
+        visitedCells = new int[mazeWidth + 1][mazeHeight + 1];
+        initializeCells(visitedCells);
+
+        mazeCells = new int[mazeWidth + 1][mazeHeight + 1];
+        initializeCells(mazeCells);
+
+        q = 0;
+        z = 0;
+        x = rnd(mazeWidth);
+
+        // 190
+        c = 1;
+        visitedCells[x][1] = c;
+        c++;
+
+        // 200
+        r = x;
+        s = 1;
+        GOTO(270);
     }
 
     public static void doit(int width, int height) {
@@ -89,25 +116,7 @@ public class Amazing {
         mazeWidth = width;
         mazeHeight = height;
         if (mazeWidth != 1 && mazeHeight != 1) {
-            visitedCells = new int[mazeWidth + 1][mazeHeight + 1];
-            initializeCells(visitedCells);
-
-            mazeCells = new int[mazeWidth + 1][mazeHeight + 1];
-            initializeCells(mazeCells);
-
-            int q = 0;
-            int z = 0;
-            x = rnd(mazeWidth);
-
-            // 190
-            int c = 1;
-            visitedCells[x][1] = c;
-            c++;
-
-            // 200
-            int r = x;
-            int s = 1;
-            GOTO(270);
+            initialize();
 
             while (target != -1) {
                 switch (target) {
