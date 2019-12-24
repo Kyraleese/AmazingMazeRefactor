@@ -51,7 +51,7 @@ public class AmazingTest  {
                         "|        |        |     |  |        |        | \n" +
                         "+--+--+--+--+--+--+--+--+  +--+--+--+--+--+--+\n";
 
-        Amazing.random = new Random(0);
+        MazeGenerator.random = new Random(0);
         Amazing.doit(15, 20);
 
         assertEquals("Should have the maze that was expected", expected, Amazing.result.toString());
@@ -73,7 +73,7 @@ public class AmazingTest  {
                         "|  |  |  |  | \n" +
                         "+--+--+  +--+\n";
 
-        Amazing.random = new Random(100);
+        MazeGenerator.random = new Random(100);
         Amazing.doit(4, 5);
         assertEquals("Should have the maze that was expected", expected, Amazing.result.toString());
 
@@ -83,7 +83,7 @@ public class AmazingTest  {
     public void testSeed100size1x1() {
         String expected = "Amazing - Copyright by Creative Computing, Morristown, NJ\n";
 
-        Amazing.random = new Random(100);
+        MazeGenerator.random = new Random(100);
         Amazing.doit(1, 1);
         assertEquals("Should have the maze that was expected", expected, Amazing.result.toString());
     }
@@ -97,7 +97,7 @@ public class AmazingTest  {
                 "|     | \n" +
                 "+  +--+\n";
 
-        Amazing.random = new Random(100);
+        MazeGenerator.random = new Random(100);
         Amazing.doit(2, 2);
         assertEquals("Should have the maze that was expected", expected, Amazing.result.toString());
     }
@@ -111,7 +111,7 @@ public class AmazingTest  {
                 "|  |  | \n" +
                 "+--+--+\n";
 
-        Amazing.random = new Random(10);
+        MazeGenerator.random = new Random(10);
         Amazing.doit(2, 2);
         assertEquals("Should have the maze that was expected", expected, Amazing.result.toString());
     }
