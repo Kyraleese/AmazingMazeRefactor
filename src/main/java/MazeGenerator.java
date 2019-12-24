@@ -74,9 +74,7 @@ public class MazeGenerator {
 
     private static void case1130() {
         row++;
-        if (c == mazeHeight * mazeWidth + 1)
-            return;
-        else
+        if (c < mazeHeight * mazeWidth + 1)
             case270();
     }
 
@@ -107,10 +105,9 @@ public class MazeGenerator {
     }
 
     private static void case1070() {
-        if (c == mazeWidth * mazeHeight + 1) {
-            return;
-        } else
+        if (c < mazeWidth * mazeHeight + 1) {
             case600();
+        }
     }
 
     private static void case1060() {
@@ -163,9 +160,7 @@ public class MazeGenerator {
     }
 
     private static void case960() {
-        if (c == mazeWidth * mazeHeight + 1)
-            return;
-        else
+        if (c < mazeWidth * mazeHeight + 1)
             case1010();
     }
 
