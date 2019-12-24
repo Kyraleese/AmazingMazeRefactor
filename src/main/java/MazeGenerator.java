@@ -463,7 +463,7 @@ public class MazeGenerator {
                     continue;
                 case 960:
                     if (c == mazeWidth * mazeHeight + 1)
-                        target = 1200;
+                        target = -1;
                     else
                         target = 1010;
                     continue;
@@ -483,7 +483,7 @@ public class MazeGenerator {
                     mazeGrid[column][row - 1] = 1;
                     row--;
                     if (c == mazeWidth * mazeHeight + 1)
-                        target = 1200;
+                        target = -1;
                     else
                         target = 1010;
                     continue;
@@ -512,7 +512,7 @@ public class MazeGenerator {
                     continue;
                 case 1070:
                     if (c == mazeWidth * mazeHeight + 1)
-                        target = 1200;
+                        target = -1;
                     else
                         target = 600;
                     continue;
@@ -541,7 +541,7 @@ public class MazeGenerator {
                 case 1130:
                     row++;
                     if (c == mazeHeight * mazeWidth + 1)
-                        target = 1200;
+                        target = -1;
                     else
                         target = 270;
                     continue;
@@ -566,9 +566,6 @@ public class MazeGenerator {
                     column = 1;
                     row = 1;
                     target = 260;
-                    continue;
-                case 1200:
-                    target = -1;
             }
 
         }
