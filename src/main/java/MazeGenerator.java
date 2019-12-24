@@ -437,7 +437,7 @@ public class MazeGenerator {
                     continue;
                 case 890:
                     if (z == 1)
-                        target = 1190;
+                        target = 210;
                     else
                         target = 900;
                     continue;
@@ -447,7 +447,7 @@ public class MazeGenerator {
                     continue;
                 case 910:
                     if (visitedCells[column][row + 1] != 0)
-                        target = 1190;
+                        target = 210;
                     else
                         target = 1090;
                     continue;
@@ -558,7 +558,7 @@ public class MazeGenerator {
                 case 1170:
                     mazeGrid[column][row] = 3;
                     q = 0;
-                    target = 1190;
+                    target = 210;
                     continue;
                 case 1180:
                     mazeGrid[column][row] = 1;
@@ -566,9 +566,6 @@ public class MazeGenerator {
                     column = 1;
                     row = 1;
                     target = 260;
-                    continue;
-                case 1190:
-                    target = 210;
                     continue;
                 case 1200:
                     target = -1;
