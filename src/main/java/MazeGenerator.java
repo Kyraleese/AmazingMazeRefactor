@@ -197,7 +197,7 @@ public class MazeGenerator {
     }
 
     private static void case880() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case910();
         else
             case890();
@@ -237,7 +237,7 @@ public class MazeGenerator {
     }
 
     private static void case810() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case840();
         else
             case820();
@@ -291,7 +291,7 @@ public class MazeGenerator {
     }
 
     private static void case720() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case750();
         else
             case730();
@@ -347,7 +347,7 @@ public class MazeGenerator {
     }
 
     private static void case640() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case670();
         else
             case650();
@@ -415,7 +415,7 @@ public class MazeGenerator {
     }
 
     private static void case530() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case560();
         else
             case540();
@@ -471,7 +471,7 @@ public class MazeGenerator {
     }
 
     private static void case450() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case480();
         else
             case460();
@@ -541,7 +541,7 @@ public class MazeGenerator {
     }
 
     private static void case350() {
-        if (row != mazeHeight)
+        if (!isLastRow())
             case380();
         else
             case360();
@@ -627,7 +627,7 @@ public class MazeGenerator {
     }
 
     private static void case220() {
-        if (row != mazeHeight) {
+        if (!isLastRow()) {
             moveToNextRowOfMaze();
             case260();
         }
@@ -635,6 +635,10 @@ public class MazeGenerator {
             moveToUpperLeftCornerOfMaze();
             case260();
         }
+    }
+
+    private static boolean isLastRow() {
+        return row == mazeHeight;
     }
 
     private static void case210() {
