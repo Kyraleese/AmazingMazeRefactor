@@ -169,9 +169,6 @@ public class MazeGenerator {
                 case 580:
                     case580();
                     continue;
-                case 590:
-                    target = 940;
-                    continue;
                 case 600:
                     case600();
                     continue;
@@ -675,7 +672,7 @@ public class MazeGenerator {
         else if (x == 2)
             target = 1090;
         else
-            target = 590;
+            target = 940;
     }
 
     private static void case570() {
@@ -685,7 +682,7 @@ public class MazeGenerator {
 
     private static void case560() {
         if (visitedCells[column][row + 1] != 0)
-            target = 590;
+            target = 940;
         else
             target = 570;
     }
@@ -697,7 +694,7 @@ public class MazeGenerator {
 
     private static void case540() {
         if (z == 1)
-            target = 590;
+            target = 940;
         else
             target = 550;
     }
