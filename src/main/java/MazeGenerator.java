@@ -443,16 +443,13 @@ public class MazeGenerator {
                     continue;
                 case 900:
                     q = 1;
-                    target = 920;
+                    target = 1090;
                     continue;
                 case 910:
                     if (visitedCells[column][row + 1] != 0)
                         target = 930;
                     else
-                        target = 920;
-                    continue;
-                case 920:
-                    target = 1090;
+                        target = 1090;
                     continue;
                 case 930:
                     target = 1190;
