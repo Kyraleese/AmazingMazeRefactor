@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AmazingTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2019-12-24T01:16:19" hostname="DESKTOP-UM2NA2C" time="0.007">
+  <properties/>
+  <testcase name="testSeed0size2x2" classname="AmazingTest" time="0.006"/>
+  <testcase name="testSeed100size1x1" classname="AmazingTest" time="0.0"/>
+  <testcase name="testSeed100size2x2" classname="AmazingTest" time="0.0"/>
+  <testcase name="testSeed100size4x5" classname="AmazingTest" time="0.0"/>
+  <testcase name="testSeed0size15x20" classname="AmazingTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
