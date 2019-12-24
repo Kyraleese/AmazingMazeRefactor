@@ -10,8 +10,8 @@ public class Amazing {
     private static int mazeHeight;
     private static int q;
     private static int z;
-    private static int s;
-    private static int r;
+    private static int row;
+    private static int column;
     private static int c;
     private static int[][] visitedCells;
     private static int[][] mazeCells;
@@ -97,16 +97,16 @@ public class Amazing {
 
         q = 0;
         z = 0;
-        x = rnd(mazeWidth);
+        int startingColumn = rnd(mazeWidth);
 
         // 190
         c = 1;
-        visitedCells[x][1] = c;
+        visitedCells[startingColumn][1] = c;
         c++;
 
         // 200
-        r = x;
-        s = 1;
+        column = startingColumn;
+        row = 1;
         GOTO(270);
     }
 
@@ -121,69 +121,69 @@ public class Amazing {
             while (target != -1) {
                 switch (target) {
                     case 210:
-                        if (r != mazeWidth)
+                        if (column != mazeWidth)
                             GOTO(250);
                         else
                             GOTO(220);
                         continue;
                     case 220:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(240);
                         else
                             GOTO(230);
                         continue;
                     case 230:
-                        r = 1;
-                        s = 1;
+                        column = 1;
+                        row = 1;
                         GOTO(260);
                         continue;
                     case 240:
-                        r = 1;
-                        s++;
+                        column = 1;
+                        row++;
                         GOTO(260);
                         continue;
                     case 250:
-                        r++;
+                        column++;
                         GOTO(260);
                         continue;
                     case 260:
-                        if (visitedCells[r][s] == 0)
+                        if (visitedCells[column][row] == 0)
                             GOTO(210);
                         else
                             GOTO(270);
                         continue;
                     case 270:
-                        if (r - 1 == 0)
+                        if (column - 1 == 0)
                             GOTO(600);
                         else
                             GOTO(280);
                         continue;
                     case 280:
-                        if (visitedCells[r - 1][s] != 0)
+                        if (visitedCells[column - 1][row] != 0)
                             GOTO(600);
                         else
                             GOTO(290);
                         continue;
                     case 290:
-                        if (s - 1 == 0)
+                        if (row - 1 == 0)
                             GOTO(430);
                         else
                             GOTO(300);
                         continue;
                     case 300:
-                        if (visitedCells[r][s - 1] != 0)
+                        if (visitedCells[column][row - 1] != 0)
                             GOTO(430);
                         else
                             GOTO(310);
                         continue;
                     case 310:
-                        if (r == mazeWidth)
+                        if (column == mazeWidth)
                             GOTO(350);
                         else
                             GOTO(320);
                         continue;
                     case 320:
-                        if (visitedCells[r + 1][s] != 0)
+                        if (visitedCells[column + 1][row] != 0)
                             GOTO(350);
                         else
                             GOTO(330);
@@ -203,7 +203,7 @@ public class Amazing {
                             GOTO(350);
                         continue;
                     case 350:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(380);
                         else
                             GOTO(360);
@@ -219,7 +219,7 @@ public class Amazing {
                         GOTO(390);
                         continue;
                     case 380:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(410);
                         else
                             GOTO(390);
@@ -251,19 +251,19 @@ public class Amazing {
                             GOTO(430);
                         continue;
                     case 430:
-                        if (r == mazeWidth)
+                        if (column == mazeWidth)
                             GOTO(530);
                         else
                             GOTO(440);
                         continue;
                     case 440:
-                        if (visitedCells[r + 1][s] != 0)
+                        if (visitedCells[column + 1][row] != 0)
                             GOTO(530);
                         else
                             GOTO(450);
                         continue;
                     case 450:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(480);
                         else
                             GOTO(460);
@@ -279,7 +279,7 @@ public class Amazing {
                         GOTO(490);
                         continue;
                     case 480:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(510);
                         else
                             GOTO(490);
@@ -311,7 +311,7 @@ public class Amazing {
                             GOTO(530);
                         continue;
                     case 530:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(560);
                         else
                             GOTO(540);
@@ -327,7 +327,7 @@ public class Amazing {
                         GOTO(570);
                         continue;
                     case 560:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(590);
                         else
                             GOTO(570);
@@ -348,31 +348,31 @@ public class Amazing {
                         GOTO(940);
                         continue;
                     case 600:
-                        if (s - 1 == 0)
+                        if (row - 1 == 0)
                             GOTO(790);
                         else
                             GOTO(610);
                         continue;
                     case 610:
-                        if (visitedCells[r][s - 1] != 0)
+                        if (visitedCells[column][row - 1] != 0)
                             GOTO(790);
                         else
                             GOTO(620);
                         continue;
                     case 620:
-                        if (r == mazeWidth)
+                        if (column == mazeWidth)
                             GOTO(720);
                         else
                             GOTO(630);
                         continue;
                     case 630:
-                        if (visitedCells[r + 1][s] != 0)
+                        if (visitedCells[column + 1][row] != 0)
                             GOTO(720);
                         else
                             GOTO(640);
                         continue;
                     case 640:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(670);
                         else
                             GOTO(650);
@@ -388,7 +388,7 @@ public class Amazing {
                         GOTO(680);
                         continue;
                     case 670:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(700);
                         else
                             GOTO(680);
@@ -420,7 +420,7 @@ public class Amazing {
                             GOTO(720);
                         continue;
                     case 720:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(750);
                         else
                             GOTO(730);
@@ -436,7 +436,7 @@ public class Amazing {
                         GOTO(760);
                         continue;
                     case 750:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(780);
                         else
                             GOTO(760);
@@ -457,19 +457,19 @@ public class Amazing {
                         GOTO(980);
                         continue;
                     case 790:
-                        if (r == mazeWidth)
+                        if (column == mazeWidth)
                             GOTO(880);
                         else
                             GOTO(800);
                         continue;
                     case 800:
-                        if (visitedCells[r + 1][s] != 0)
+                        if (visitedCells[column + 1][row] != 0)
                             GOTO(880);
                         else
                             GOTO(810);
                         continue;
                     case 810:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(840);
                         else
                             GOTO(820);
@@ -485,7 +485,7 @@ public class Amazing {
                         GOTO(990);
                         continue;
                     case 840:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(870);
                         else
                             GOTO(850);
@@ -506,7 +506,7 @@ public class Amazing {
                         GOTO(1020);
                         continue;
                     case 880:
-                        if (s != mazeHeight)
+                        if (row != mazeHeight)
                             GOTO(910);
                         else
                             GOTO(890);
@@ -522,7 +522,7 @@ public class Amazing {
                         GOTO(920);
                         continue;
                     case 910:
-                        if (visitedCells[r][s + 1] != 0)
+                        if (visitedCells[column][row + 1] != 0)
                             GOTO(930);
                         else
                             GOTO(920);
@@ -534,13 +534,13 @@ public class Amazing {
                         GOTO(1190);
                         continue;
                     case 940:
-                        visitedCells[r - 1][s] = c;
+                        visitedCells[column - 1][row] = c;
                         GOTO(950);
                         continue;
                     case 950:
                         c++;
-                        mazeCells[r - 1][s] = 2;
-                        r--;
+                        mazeCells[column - 1][row] = 2;
+                        column--;
                         GOTO(960);
                         continue;
                     case 960:
@@ -554,7 +554,7 @@ public class Amazing {
                         GOTO(270);
                         continue;
                     case 980:
-                        visitedCells[r][s - 1] = c;
+                        visitedCells[column][row - 1] = c;
                         GOTO(990);
                         continue;
                     case 990:
@@ -562,8 +562,8 @@ public class Amazing {
                         GOTO(1000);
                         continue;
                     case 1000:
-                        mazeCells[r][s - 1] = 1;
-                        s--;
+                        mazeCells[column][row - 1] = 1;
+                        row--;
                         if (c == mazeWidth * mazeHeight + 1)
                             GOTO(1200);
                         else
@@ -574,26 +574,26 @@ public class Amazing {
                         GOTO(270);
                         continue;
                     case 1020:
-                        visitedCells[r + 1][s] = c;
+                        visitedCells[column + 1][row] = c;
                         GOTO(1030);
                         continue;
                     case 1030:
                         c++;
-                        if (mazeCells[r][s] == 0)
+                        if (mazeCells[column][row] == 0)
                             GOTO(1050);
                         else
                             GOTO(1040);
                         continue;
                     case 1040:
-                        mazeCells[r][s] = 3;
+                        mazeCells[column][row] = 3;
                         GOTO(1060);
                         continue;
                     case 1050:
-                        mazeCells[r][s] = 2;
+                        mazeCells[column][row] = 2;
                         GOTO(1060);
                         continue;
                     case 1060:
-                        r++;
+                        column++;
                         GOTO(1070);
                         continue;
                     case 1070:
@@ -612,23 +612,23 @@ public class Amazing {
                             GOTO(1100);
                         continue;
                     case 1100:
-                        visitedCells[r][s + 1] = c;
+                        visitedCells[column][row + 1] = c;
                         c++;
-                        if (mazeCells[r][s] == 0)
+                        if (mazeCells[column][row] == 0)
                             GOTO(1120);
                         else
                             GOTO(1110);
                         continue;
                     case 1110:
-                        mazeCells[r][s] = 3;
+                        mazeCells[column][row] = 3;
                         GOTO(1130);
                         continue;
                     case 1120:
-                        mazeCells[r][s] = 1;
+                        mazeCells[column][row] = 1;
                         GOTO(1130);
                         continue;
                     case 1130:
-                        s++;
+                        row++;
                         if (c == mazeHeight * mazeWidth + 1)
                             GOTO(1200);
                         else
@@ -642,21 +642,21 @@ public class Amazing {
                         GOTO(1160);
                         continue;
                     case 1160:
-                        if (mazeCells[r][s] == 0)
+                        if (mazeCells[column][row] == 0)
                             GOTO(1180);
                         else
                             GOTO(1170);
                         continue;
                     case 1170:
-                        mazeCells[r][s] = 3;
+                        mazeCells[column][row] = 3;
                         q = 0;
                         GOTO(1190);
                         continue;
                     case 1180:
-                        mazeCells[r][s] = 1;
+                        mazeCells[column][row] = 1;
                         q = 0;
-                        r = 1;
-                        s = 1;
+                        column = 1;
+                        row = 1;
                         GOTO(260);
                         continue;
                     case 1190:
