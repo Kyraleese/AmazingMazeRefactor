@@ -543,10 +543,7 @@ public class MazeGenerator {
                     if (c == mazeHeight * mazeWidth + 1)
                         target = 1200;
                     else
-                        target = 1140;
-                    continue;
-                case 1140:
-                    target = 270;
+                        target = 270;
                     continue;
                 case 1150:
                     z = 1;
