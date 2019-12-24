@@ -47,8 +47,13 @@ public class MazeGenerator {
         return (int) (count * random.nextFloat()) + 1;
     }
 
+
+    private static boolean shouldContinueGenerating() {
+        return target != -1;
+    }
+
     public static void generate() {
-        while (target != -1) {
+        while (shouldContinueGenerating()) {
             switch (target) {
                 case 210:
                     if (column != mazeWidth)
@@ -570,4 +575,5 @@ public class MazeGenerator {
 
         }
     }
+
 }
