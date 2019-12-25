@@ -296,7 +296,7 @@ public class MazeGenerator {
     }
 
     private static void case600() {
-        if (row - 1 == 0)
+        if (isFirstRow())
             case790();
         else
             case610();
@@ -493,7 +493,7 @@ public class MazeGenerator {
     }
 
     private static void case290() {
-        if (row - 1 == 0)
+        if (isFirstRow())
             case430();
         else
             case300();
@@ -507,7 +507,7 @@ public class MazeGenerator {
     }
 
     private static void beginProcessing() {
-        if (column - 1 == 0)
+        if (isFirstColumn())
             case600();
         else
             case280();
@@ -536,6 +536,14 @@ public class MazeGenerator {
 
     private static boolean isLastRow() {
         return row == mazeHeight;
+    }
+
+    private static boolean isFirstRow() {
+        return row == 1;
+    }
+
+    private static boolean isFirstColumn() {
+        return column == 1;
     }
 
     private static void moveToNextColumnOfMaze() {
