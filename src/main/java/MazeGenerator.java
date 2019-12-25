@@ -122,7 +122,7 @@ public class MazeGenerator {
     }
 
     private static void case1050() {
-        mazeGrid[column][row] = BOTTOM_WALL;
+        setCellToBottomWall();
         case1060();
     }
 
@@ -170,16 +170,11 @@ public class MazeGenerator {
             case1010();
     }
 
-    private static void case950() {
-        c++;
-        mazeGrid[column - 1][row] = BOTTOM_WALL;
-        column--;
-        case960();
-    }
-
     private static void case940() {
-        visitedCells[column - 1][row] = c;
-        case950();
+        moveToPreviousColumnOfMaze();
+        setCellToBottomWall();
+        setCellAsVisited();
+        case960();
     }
 
     private static void case910() {
@@ -608,6 +603,10 @@ public class MazeGenerator {
         column++;
     }
 
+    private static void moveToPreviousColumnOfMaze() {
+        column--;
+    }
+
     private static void moveToNextRowOfMaze() {
         column = 1;
         row++;
@@ -636,6 +635,15 @@ public class MazeGenerator {
 
     private static boolean cellToOurRightAlreadyChecked() {
         return visitedCells[column + 1][row] != 0;
+    }
+
+    private static void setCellAsVisited() {
+        visitedCells[column][row] = c;
+        c++;
+    }
+
+    private static void setCellToBottomWall() {
+        mazeGrid[column][row] = BOTTOM_WALL;
     }
 
 }
