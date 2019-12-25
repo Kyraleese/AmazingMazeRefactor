@@ -138,64 +138,52 @@ public class MazeGenerator {
     }
 
     private static void case600() {
-        if (cannotProcessCellAboveUs()) {
-            if (cannotProcessCellToOurRight()) {
-                if (!isLastRow())
-                    if (cellBelowUsAlreadyChecked())
-                        moveToNextCell();
-                    else
-                        case1090();
-                else if (z == 1)
-                    moveToNextCell();
-                else {
-                    q = 1;
-                    case1090();
-                }
-            }
-            else if (!isLastRow()) {
-                if (cellBelowUsAlreadyChecked())
-                    case1020();
-                else {
-                    x = rnd(2);
-                    if (x == 1)
-                        case1020();
-                    else if (x == 2)
-                        case1090();
-                }
-            }
-            else if (z == 1)
+        if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked())
+            moveToNextCell();
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow())
+            case1090();
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && z == 1)
+            moveToNextCell();
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight()){
+            q = 1;
+            case1090();
+        }
+        else if (cannotProcessCellAboveUs() &&!isLastRow() && cellBelowUsAlreadyChecked())
+            case1020();
+        else if (cannotProcessCellAboveUs() && !isLastRow()) {
+            x = rnd(2);
+            if (x == 1)
                 case1020();
-            else {
-                q = 1;
-                c++;
-                moveUpARow();
-                setCellToRightWall();
-                case960();
-            }
+            else if (x == 2)
+                case1090();
         }
-        else if (cannotProcessCellToOurRight()) {
-            if (!isLastRow())
-                if (cellBelowUsAlreadyChecked()) {
-                    setCellAboveAsRightWall();
-                    case960();
-                }
-                else
-                    case760();
-            else if (z == 1) {
-                setCellAboveAsRightWall();
-                case960();
-            }
-            else {
-                q = 1;
-                case760();
-            }
+        else if (cannotProcessCellAboveUs() && z == 1)
+            case1020();
+        else if (cannotProcessCellAboveUs()){
+            q = 1;
+            c++;
+            moveUpARow();
+            setCellToRightWall();
+            case960();
         }
-        else if (!isLastRow()) {
-            if (cellBelowUsAlreadyChecked())
-                case700();
-            else
-                case680();
+        else if (cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked()) {
+            setCellAboveAsRightWall();
+            case960();
         }
+        else if (cannotProcessCellToOurRight() && !isLastRow())
+            case760();
+        else if (cannotProcessCellToOurRight() && z == 1) {
+            setCellAboveAsRightWall();
+            case960();
+        }
+        else if (cannotProcessCellToOurRight()){
+            q = 1;
+            case760();
+        }
+        else if (!isLastRow() && cellBelowUsAlreadyChecked())
+            case700();
+        else if (!isLastRow())
+            case680();
         else if (z == 1)
             case700();
         else {
