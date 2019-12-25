@@ -50,7 +50,7 @@ public class MazeGenerator {
     }
 
     public static void generate() {
-        case270();
+        beginProcessing();
     }
 
     private static void case1180() {
@@ -90,7 +90,7 @@ public class MazeGenerator {
 
         moveDownARow();
         if (c < mazeHeight * mazeWidth + 1)
-            case270();
+            beginProcessing();
     }
 
     private static void case1090() {
@@ -130,7 +130,7 @@ public class MazeGenerator {
     private static void case960() {
         if (unvisitedCellsRemain()) {
             q = 0;
-            case270();
+            beginProcessing();
         }
     }
 
@@ -528,7 +528,7 @@ public class MazeGenerator {
             case290();
     }
 
-    private static void case270() {
+    private static void beginProcessing() {
         if (column - 1 == 0)
             case600();
         else
@@ -539,7 +539,7 @@ public class MazeGenerator {
         if (currentCellUnchecked())
             moveToNextCell();
         else
-            case270();
+            beginProcessing();
     }
 
     private static void moveToNextCell() {
