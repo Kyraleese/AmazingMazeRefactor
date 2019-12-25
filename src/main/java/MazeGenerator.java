@@ -63,7 +63,7 @@ public class MazeGenerator {
     private static void case1170() {
         mazeGrid[column][row] = NO_WALLS;
         q = 0;
-        case210();
+        moveToNextCell();
     }
 
     private static void case1160() {
@@ -184,7 +184,7 @@ public class MazeGenerator {
 
     private static void case910() {
         if (cellBelowUsAlreadyChecked())
-            case210();
+            moveToNextCell();
         else
             case1090();
     }
@@ -196,7 +196,7 @@ public class MazeGenerator {
 
     private static void case890() {
         if (z == 1)
-            case210();
+            moveToNextCell();
         else
             case900();
     }
@@ -577,29 +577,23 @@ public class MazeGenerator {
 
     private static void case260() {
         if (currentCellUnchecked())
-            case210();
+            moveToNextCell();
         else
             case270();
     }
 
-    private static void case220() {
-        if (!isLastRow()) {
+    private static void moveToNextCell() {
+        if (!isLastColumn()) {
+            moveToNextColumnOfMaze();
+        }
+        else if (!isLastRow()) {
             moveToNextRowOfMaze();
-            case260();
         }
         else {
             moveToUpperLeftCornerOfMaze();
-            case260();
         }
-    }
 
-    private static void case210() {
-        if (!isLastColumn()) {
-            moveToNextColumnOfMaze();
-            case260();
-        }
-        else
-            case220();
+        case260();
     }
 
     private static boolean isLastColumn() {
