@@ -131,9 +131,9 @@ public class MazeGenerator {
     }
 
     private static void case600() {
-        if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked())
+        if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && isNotLastRow() && cellBelowUsAlreadyChecked())
             moveToNextCell();
-        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow())
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && isNotLastRow())
             case1090();
         else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && z == 1)
             moveToNextCell();
@@ -141,9 +141,9 @@ public class MazeGenerator {
             q = 1;
             case1090();
         }
-        else if (cannotProcessCellAboveUs() &&!isLastRow() && cellBelowUsAlreadyChecked())
+        else if (cannotProcessCellAboveUs() && isNotLastRow() && cellBelowUsAlreadyChecked())
             case1020();
-        else if (cannotProcessCellAboveUs() && !isLastRow()) {
+        else if (cannotProcessCellAboveUs() && isNotLastRow()) {
             x = rnd(2);
             if (x == 1)
                 case1020();
@@ -159,11 +159,11 @@ public class MazeGenerator {
             setCellToRightWall();
             beginProcessingAndSetQToZeroIfNotAllCellsVisited();
         }
-        else if (cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked()) {
+        else if (cannotProcessCellToOurRight() && isNotLastRow() && cellBelowUsAlreadyChecked()) {
             setCellAboveAsRightWall();
             beginProcessingAndSetQToZeroIfNotAllCellsVisited();
         }
-        else if (cannotProcessCellToOurRight() && !isLastRow())
+        else if (cannotProcessCellToOurRight() && isNotLastRow())
             case760();
         else if (cannotProcessCellToOurRight() && z == 1) {
             setCellAboveAsRightWall();
@@ -173,9 +173,9 @@ public class MazeGenerator {
             q = 1;
             case760();
         }
-        else if (!isLastRow() && cellBelowUsAlreadyChecked())
+        else if (isNotLastRow() && cellBelowUsAlreadyChecked())
             case700();
-        else if (!isLastRow())
+        else if (isNotLastRow())
             case680();
         else if (z == 1)
             case700();
@@ -247,11 +247,11 @@ public class MazeGenerator {
     private static void beginProcessing() {
         if (cannotProcessCellToOurLeft())
             case600();
-        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked()) {
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && isNotLastRow() && cellBelowUsAlreadyChecked()) {
             setCellToLeftAsBottomWall();
             beginProcessingAndSetQToZeroIfNotAllCellsVisited();
         }
-        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow())
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && isNotLastRow())
             case570();
         else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && z == 1) {
             setCellToLeftAsBottomWall();
@@ -261,9 +261,9 @@ public class MazeGenerator {
             q = 1;
             case570();
         }
-        else if (cannotProcessCellAboveUs() && !isLastRow() && cellBelowUsAlreadyChecked())
+        else if (cannotProcessCellAboveUs() && isNotLastRow() && cellBelowUsAlreadyChecked())
             case510();
-        else if (cannotProcessCellAboveUs() && !isLastRow())
+        else if (cannotProcessCellAboveUs() && isNotLastRow())
             case490();
         else if (cannotProcessCellAboveUs() && z == 1)
             case510();
@@ -271,9 +271,9 @@ public class MazeGenerator {
             q = 1;
             case490();
         }
-        else if (cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked())
+        else if (cannotProcessCellToOurRight() && isNotLastRow() && cellBelowUsAlreadyChecked())
             case410();
-        else if (cannotProcessCellToOurRight() && !isLastRow())
+        else if (cannotProcessCellToOurRight() && isNotLastRow())
             case390();
         else if (cannotProcessCellToOurRight() && z == 1)
             case410();
@@ -300,7 +300,7 @@ public class MazeGenerator {
         if (!isLastColumn()) {
             moveToNextColumnOfMaze();
         }
-        else if (!isLastRow()) {
+        else if (isNotLastRow()) {
             moveToNextRowOfMaze();
         }
         else {
@@ -317,8 +317,8 @@ public class MazeGenerator {
         return column == mazeWidth;
     }
 
-    private static boolean isLastRow() {
-        return row == mazeHeight;
+    private static boolean isNotLastRow() {
+        return row != mazeHeight;
     }
 
     private static boolean isFirstRow() {
