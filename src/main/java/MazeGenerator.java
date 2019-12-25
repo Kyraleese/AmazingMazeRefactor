@@ -627,10 +627,14 @@ public class MazeGenerator {
     }
 
     private static void case260() {
-        if (visitedCells[column][row] == 0)
+        if (currentCellUnvisited())
             case210();
         else
             case270();
+    }
+
+    private static boolean currentCellUnvisited() {
+        return visitedCells[column][row] == 0;
     }
 
     private static void case220() {
