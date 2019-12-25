@@ -119,9 +119,11 @@ public class MazeGenerator {
 
         moveToNextColumnOfMaze();
         setCellAsVisited();
+        continueIfNotAllCellsVisited();
+    }
 
-        if (c < mazeWidth * mazeHeight + 1)
-            case600();
+    private static boolean unvisitedCellsRemain() {
+        return c < mazeWidth * mazeHeight + 1;
     }
 
     private static void setCellToNoWalls() {
@@ -136,7 +138,7 @@ public class MazeGenerator {
     }
 
     private static void case960() {
-        if (c < mazeWidth * mazeHeight + 1) {
+        if (unvisitedCellsRemain()) {
             q = 0;
             case270();
         }
@@ -653,6 +655,11 @@ public class MazeGenerator {
 
     private static void setCellToRightWall() {
         mazeGrid[column][row] = RIGHT_WALL;
+    }
+
+    private static void continueIfNotAllCellsVisited() {
+        if (unvisitedCellsRemain())
+            case600();
     }
 
     private static void setCellToLeftAsBottomWall() {
