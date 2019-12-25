@@ -609,10 +609,14 @@ public class MazeGenerator {
     }
 
     private static void case280() {
-        if (visitedCells[column - 1][row] != 0)
+        if (cellToLeftOfUsAlreadyChecked())
             case600();
         else
             case290();
+    }
+
+    private static boolean cellToLeftOfUsAlreadyChecked() {
+        return visitedCells[column - 1][row] != 0;
     }
 
     private static void case270() {
