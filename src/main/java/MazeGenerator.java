@@ -256,7 +256,7 @@ public class MazeGenerator {
     }
 
     private static void case790() {
-        if (column == mazeWidth)
+        if (isLastColumn())
             case880();
         else
             case800();
@@ -366,7 +366,7 @@ public class MazeGenerator {
     }
 
     private static void case620() {
-        if (column == mazeWidth)
+        if (isLastColumn())
             case720();
         else
             case630();
@@ -490,7 +490,7 @@ public class MazeGenerator {
     }
 
     private static void case430() {
-        if (column == mazeWidth)
+        if (isLastColumn())
             case530();
         else
             case440();
@@ -576,7 +576,7 @@ public class MazeGenerator {
     }
 
     private static void case310() {
-        if (column == mazeWidth)
+        if (isLastColumn())
             case350();
         else
             case320();
