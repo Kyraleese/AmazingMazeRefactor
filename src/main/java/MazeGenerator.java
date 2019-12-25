@@ -19,15 +19,15 @@ public class MazeGenerator {
     private static int BOTTOM_WALL = 2;
     private static int NO_WALLS = 3;
 
-    public static int[][] getVisitedCells() {
+    static int[][] getVisitedCells() {
         return visitedCells;
     }
 
-    public static int[][] getMazeGrid() {
+    static int[][] getMazeGrid() {
         return mazeGrid;
     }
 
-    public MazeGenerator(int[][] mazeCells, int[][] mazeVisitedCells) {
+    MazeGenerator(int[][] mazeCells, int[][] mazeVisitedCells) {
         mazeHeight = mazeCells[0].length - 1;
         mazeWidth = mazeCells.length - 1;
         visitedCells = mazeVisitedCells;
@@ -49,7 +49,7 @@ public class MazeGenerator {
         return (int) (count * random.nextFloat()) + 1;
     }
 
-    public static void generate() {
+    static void generate() {
         beginProcessing();
     }
 
