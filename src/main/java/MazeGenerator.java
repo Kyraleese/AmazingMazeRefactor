@@ -377,7 +377,7 @@ public class MazeGenerator {
     }
 
     private static void case610() {
-        if (visitedCells[column][row - 1] != 0)
+        if (cellAboveUsAlreadyChecked())
             case790();
         else
             case620();
@@ -587,10 +587,14 @@ public class MazeGenerator {
     }
 
     private static void case300() {
-        if (visitedCells[column][row - 1] != 0)
+        if (cellAboveUsAlreadyChecked())
             case430();
         else
             case310();
+    }
+
+    private static boolean cellAboveUsAlreadyChecked() {
+        return visitedCells[column][row - 1] != 0;
     }
 
     private static void case290() {
