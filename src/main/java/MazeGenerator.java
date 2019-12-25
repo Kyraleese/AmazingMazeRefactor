@@ -254,49 +254,39 @@ public class MazeGenerator {
     private static void beginProcessing() {
         if (cannotProcessCellToOurLeft())
             case600();
-        else if (cannotProcessCellAboveUs()) {
-            if (cannotProcessCellToOurRight()) {
-                if (!isLastRow())
-                    if (cellBelowUsAlreadyChecked()) {
-                        setCellToLeftAsBottomWall();
-                        case960();
-                    }
-                    else
-                        case570();
-                else if (z == 1) {
-                    setCellToLeftAsBottomWall();
-                    case960();
-                }
-                else {
-                    q = 1;
-                    case570();
-                }
-            }
-            else if (!isLastRow()) {
-                if (cellBelowUsAlreadyChecked())
-                    case510();
-                else
-                    case490();
-            }
-            else if (z == 1)
-                case510();
-            else {
-                q = 1;
-                case490();
-            }
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked()) {
+            setCellToLeftAsBottomWall();
+            case960();
         }
-        else if (cannotProcessCellToOurRight()) {
-            if (!isLastRow())
-                if (cellBelowUsAlreadyChecked())
-                    case410();
-                else
-                    case390();
-            else if (z == 1)
-                case410();
-            else {
-                q = 1;
-                case390();
-            }
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && !isLastRow())
+            case570();
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight() && z == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
+        else if (cannotProcessCellAboveUs() && cannotProcessCellToOurRight()) {
+            q = 1;
+            case570();
+        }
+        else if (cannotProcessCellAboveUs() && !isLastRow() && cellBelowUsAlreadyChecked())
+            case510();
+        else if (cannotProcessCellAboveUs() && !isLastRow())
+            case490();
+        else if (cannotProcessCellAboveUs() && z == 1)
+            case510();
+        else if (cannotProcessCellAboveUs()) {
+            q = 1;
+            case490();
+        }
+        else if (cannotProcessCellToOurRight() && !isLastRow() && cellBelowUsAlreadyChecked())
+            case410();
+        else if (cannotProcessCellToOurRight() && !isLastRow())
+            case390();
+        else if (cannotProcessCellToOurRight() && z == 1)
+            case410();
+        else if (cannotProcessCellToOurRight()){
+            q = 1;
+            case390();
         }
         else {
             x = rnd(3);
