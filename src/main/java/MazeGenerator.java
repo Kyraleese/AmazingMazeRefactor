@@ -365,10 +365,6 @@ public class MazeGenerator {
             case640();
     }
 
-    private static boolean cellToOurRightAlreadyChecked() {
-        return visitedCells[column + 1][row] != 0;
-    }
-
     private static void case620() {
         if (isLastColumn())
             case720();
@@ -409,10 +405,6 @@ public class MazeGenerator {
             case940();
         else
             case570();
-    }
-
-    private static boolean cellBelowUsAlreadyChecked() {
-        return visitedCells[column][row + 1] != 0;
     }
 
     private static void case550() {
@@ -597,10 +589,6 @@ public class MazeGenerator {
             case310();
     }
 
-    private static boolean cellAboveUsAlreadyChecked() {
-        return visitedCells[column][row - 1] != 0;
-    }
-
     private static void case290() {
         if (row - 1 == 0)
             case430();
@@ -615,10 +603,6 @@ public class MazeGenerator {
             case290();
     }
 
-    private static boolean cellToLeftOfUsAlreadyChecked() {
-        return visitedCells[column - 1][row] != 0;
-    }
-
     private static void case270() {
         if (column - 1 == 0)
             case600();
@@ -627,14 +611,10 @@ public class MazeGenerator {
     }
 
     private static void case260() {
-        if (currentCellUnvisited())
+        if (currentCellUnchecked())
             case210();
         else
             case270();
-    }
-
-    private static boolean currentCellUnvisited() {
-        return visitedCells[column][row] == 0;
     }
 
     private static void case220() {
@@ -677,6 +657,26 @@ public class MazeGenerator {
     private static void moveToUpperLeftCornerOfMaze() {
         column = 1;
         row = 1;
+    }
+
+    private static boolean currentCellUnchecked() {
+        return visitedCells[column][row] == 0;
+    }
+
+    private static boolean cellToLeftOfUsAlreadyChecked() {
+        return visitedCells[column - 1][row] != 0;
+    }
+
+    private static boolean cellAboveUsAlreadyChecked() {
+        return visitedCells[column][row - 1] != 0;
+    }
+
+    private static boolean cellBelowUsAlreadyChecked() {
+        return visitedCells[column][row + 1] != 0;
+    }
+
+    private static boolean cellToOurRightAlreadyChecked() {
+        return visitedCells[column + 1][row] != 0;
     }
 
 }
