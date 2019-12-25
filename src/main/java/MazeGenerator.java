@@ -249,7 +249,7 @@ public class MazeGenerator {
     }
 
     private static void case800() {
-        if (visitedCells[column + 1][row] != 0)
+        if (columnToRightAlreadyVisited())
             case880();
         else
             case810();
@@ -359,10 +359,14 @@ public class MazeGenerator {
     }
 
     private static void case630() {
-        if (visitedCells[column + 1][row] != 0)
+        if (columnToRightAlreadyVisited())
             case720();
         else
             case640();
+    }
+
+    private static boolean columnToRightAlreadyVisited() {
+        return visitedCells[column + 1][row] != 0;
     }
 
     private static void case620() {
@@ -483,7 +487,7 @@ public class MazeGenerator {
     }
 
     private static void case440() {
-        if (visitedCells[column + 1][row] != 0)
+        if (columnToRightAlreadyVisited())
             case530();
         else
             case450();
@@ -569,7 +573,7 @@ public class MazeGenerator {
     }
 
     private static void case320() {
-        if (visitedCells[column + 1][row] != 0)
+        if (columnToRightAlreadyVisited())
             case350();
         else
             case330();
