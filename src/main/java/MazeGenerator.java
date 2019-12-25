@@ -53,51 +53,38 @@ public class MazeGenerator {
         beginProcessing();
     }
 
-    private static void case1180() {
-        setCellToRightWall();
-        q = 0;
-        moveToUpperLeftCornerOfMaze();
-        case260();
-    }
+    private static void case1090() {
+        if (q == 1) {
+            z = 1;
+            q = 0;
 
-    private static void case1170() {
-        setCellToNoWalls();
-        q = 0;
-        moveToNextCell();
-    }
-
-    private static void case1160() {
-        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER)
-            case1180();
-        else
-            case1170();
-    }
-
-    private static void case1150() {
-        z = 1;
-        case1160();
-    }
-
-    private static void case1100() {
-        visitedCells[column][row + 1] = c;
-        c++;
-        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
-            setCellToRightWall();
+            if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
+                setCellToRightWall();
+                moveToUpperLeftCornerOfMaze();
+                if (currentCellUnchecked())
+                    moveToNextCell();
+                else
+                    beginProcessing();
+            }
+            else {
+                setCellToNoWalls();
+                moveToNextCell();
+            }
         }
         else {
-            setCellToNoWalls();
+            visitedCells[column][row + 1] = c;
+            c++;
+            if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
+                setCellToRightWall();
+            }
+            else {
+                setCellToNoWalls();
+            }
+
+            moveDownARow();
+            if (c < mazeHeight * mazeWidth + 1)
+                beginProcessing();
         }
-
-        moveDownARow();
-        if (c < mazeHeight * mazeWidth + 1)
-            beginProcessing();
-    }
-
-    private static void case1090() {
-        if (q == 1)
-            case1150();
-        else
-            case1100();
     }
 
     private static void case1020() {
@@ -535,13 +522,6 @@ public class MazeGenerator {
             case280();
     }
 
-    private static void case260() {
-        if (currentCellUnchecked())
-            moveToNextCell();
-        else
-            beginProcessing();
-    }
-
     private static void moveToNextCell() {
         if (!isLastColumn()) {
             moveToNextColumnOfMaze();
@@ -553,7 +533,10 @@ public class MazeGenerator {
             moveToUpperLeftCornerOfMaze();
         }
 
-        case260();
+        if (currentCellUnchecked())
+            moveToNextCell();
+        else
+            beginProcessing();
     }
 
     private static boolean isLastColumn() {
