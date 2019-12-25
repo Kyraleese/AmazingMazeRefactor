@@ -98,13 +98,6 @@ public class MazeGenerator {
         continueIfNotAllCellsVisited();
     }
 
-    private static void case990() {
-        c++;
-        moveUpARow();
-        setCellToRightWall();
-        case960();
-    }
-
     private static void case960() {
         if (unvisitedCellsRemain()) {
             q = 0;
@@ -112,78 +105,46 @@ public class MazeGenerator {
         }
     }
 
-    private static void case910() {
-        if (cellBelowUsAlreadyChecked())
-            moveToNextCell();
-        else
-            case1090();
-    }
-
-    private static void case900() {
-        q = 1;
-        case1090();
-    }
-
-    private static void case890() {
-        if (z == 1)
-            moveToNextCell();
-        else
-            case900();
-    }
-
     private static void case880() {
         if (!isLastRow())
-            case910();
-        else
-            case890();
-    }
-
-    private static void case850() {
-        x = rnd(2);
-        if (x == 1)
-            case1020();
-        else if (x == 2)
+            if (cellBelowUsAlreadyChecked())
+                moveToNextCell();
+            else
+                case1090();
+        else if (z == 1)
+            moveToNextCell();
+        else {
+            q = 1;
             case1090();
-    }
-
-    private static void case840() {
-        if (cellBelowUsAlreadyChecked())
-            case1020();
-        else
-            case850();
-    }
-
-    private static void case830() {
-        q = 1;
-        case990();
-    }
-
-    private static void case820() {
-        if (z == 1)
-            case1020();
-        else
-            case830();
-    }
-
-    private static void case810() {
-        if (!isLastRow())
-            case840();
-        else
-            case820();
-    }
-
-    private static void case800() {
-        if (cellToOurRightAlreadyChecked())
-            case880();
-        else
-            case810();
+        }
     }
 
     private static void case790() {
         if (isLastColumn())
             case880();
-        else
-            case800();
+        else if (cellToOurRightAlreadyChecked())
+            case880();
+        else {
+            if (!isLastRow())
+                if (cellBelowUsAlreadyChecked())
+                    case1020();
+                else {
+                    x = rnd(2);
+                    if (x == 1)
+                        case1020();
+                    else if (x == 2)
+                        case1090();
+                }
+            else if (z == 1)
+                case1020();
+            else {
+                q = 1;
+                c++;
+                moveUpARow();
+                setCellToRightWall();
+                case960();
+            }
+        }
     }
 
     private static void case760() {
@@ -196,34 +157,22 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case750() {
-        if (cellBelowUsAlreadyChecked()) {
-            setCellAboveAsRightWall();
-            case960();
-        }
-        else
-            case760();
-    }
-
-    private static void case740() {
-        q = 1;
-        case760();
-    }
-
-    private static void case730() {
-        if (z == 1) {
-            setCellAboveAsRightWall();
-            case960();
-        }
-        else
-            case740();
-    }
-
     private static void case720() {
         if (!isLastRow())
-            case750();
-        else
-            case730();
+            if (cellBelowUsAlreadyChecked()) {
+                setCellAboveAsRightWall();
+                case960();
+            }
+            else
+                case760();
+        else if (z == 1) {
+            setCellAboveAsRightWall();
+            case960();
+        }
+        else {
+            q = 1;
+            case760();
+        }
     }
 
     private static void case700() {
@@ -248,58 +197,30 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case670() {
-        if (cellBelowUsAlreadyChecked())
-            case700();
-        else
-            case680();
-    }
-
-    private static void case660() {
-        q = 1;
-        case680();
-    }
-
-    private static void case650() {
-        if (z == 1)
-            case700();
-        else
-            case660();
-    }
-
-    private static void case640() {
-        if (!isLastRow())
-            case670();
-        else
-            case650();
-    }
-
-    private static void case630() {
-        if (cellToOurRightAlreadyChecked())
-            case720();
-        else
-            case640();
-    }
-
-    private static void case620() {
-        if (isLastColumn())
-            case720();
-        else
-            case630();
-    }
-
-    private static void case610() {
-        if (cellAboveUsAlreadyChecked())
-            case790();
-        else
-            case620();
-    }
-
     private static void case600() {
         if (isFirstRow())
             case790();
-        else
-            case610();
+        else if (cellAboveUsAlreadyChecked())
+            case790();
+        else {
+            if (isLastColumn())
+                case720();
+            else if (cellToOurRightAlreadyChecked())
+                case720();
+            else {
+                if (!isLastRow())
+                    if (cellBelowUsAlreadyChecked())
+                        case700();
+                    else
+                        case680();
+                else if (z == 1)
+                    case700();
+                else {
+                    q = 1;
+                    case680();
+                }
+            }
+        }
     }
 
     private static void case570() {
@@ -312,34 +233,22 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case560() {
-        if (cellBelowUsAlreadyChecked()) {
-            setCellToLeftAsBottomWall();
-            case960();
-        }
-        else
-            case570();
-    }
-
-    private static void case550() {
-        q = 1;
-        case570();
-    }
-
-    private static void case540() {
-        if (z == 1) {
-            setCellToLeftAsBottomWall();
-            case960();
-        }
-        else
-            case550();
-    }
-
     private static void case530() {
         if (!isLastRow())
-            case560();
-        else
-            case540();
+            if (cellBelowUsAlreadyChecked()) {
+                setCellToLeftAsBottomWall();
+                case960();
+            }
+            else
+                case570();
+        else if (z == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
+        else {
+            q = 1;
+            case570();
+        }
     }
 
     private static void case510() {
@@ -364,44 +273,24 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case480() {
-        if (cellBelowUsAlreadyChecked())
-            case510();
-        else
-            case490();
-    }
-
-    private static void case470() {
-        q = 1;
-        case490();
-    }
-
-    private static void case460() {
-        if (z == 1)
-            case510();
-        else
-            case470();
-    }
-
-    private static void case450() {
-        if (!isLastRow())
-            case480();
-        else
-            case460();
-    }
-
-    private static void case440() {
-        if (cellToOurRightAlreadyChecked())
-            case530();
-        else
-            case450();
-    }
-
     private static void case430() {
         if (isLastColumn())
             case530();
-        else
-            case440();
+        else if (cellToOurRightAlreadyChecked())
+            case530();
+        else {
+            if (!isLastRow())
+                if (cellBelowUsAlreadyChecked())
+                    case510();
+                else
+                    case490();
+            else if (z == 1)
+                case510();
+            else {
+                q = 1;
+                case490();
+            }
+        }
     }
 
     private static void case410() {
@@ -431,86 +320,50 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case380() {
-        if (cellBelowUsAlreadyChecked())
-            case410();
-        else
-            case390();
-    }
-
-    private static void case370() {
-        q = 1;
-        case390();
-    }
-
-    private static void case360() {
-        if (z == 1)
-            case410();
-        else
-            case370();
-    }
-
     private static void case350() {
         if (!isLastRow())
-            case380();
-        else
-            case360();
-    }
-
-    private static void case330() {
-        x = rnd(3);
-        if (x == 1) {
-            setCellToLeftAsBottomWall();
-            case960();
+            if (cellBelowUsAlreadyChecked())
+                case410();
+            else
+                case390();
+        else if (z == 1)
+            case410();
+        else {
+            q = 1;
+            case390();
         }
-        else if (x == 2) {
-            setCellAboveAsRightWall();
-            case960();
-        }
-        else if (x == 3)
-            case1020();
-    }
-
-    private static void case320() {
-        if (cellToOurRightAlreadyChecked())
-            case350();
-        else
-            case330();
-    }
-
-    private static void case310() {
-        if (isLastColumn())
-            case350();
-        else
-            case320();
-    }
-
-    private static void case300() {
-        if (cellAboveUsAlreadyChecked())
-            case430();
-        else
-            case310();
-    }
-
-    private static void case290() {
-        if (isFirstRow())
-            case430();
-        else
-            case300();
-    }
-
-    private static void case280() {
-        if (cellToLeftOfUsAlreadyChecked())
-            case600();
-        else
-            case290();
     }
 
     private static void beginProcessing() {
         if (isFirstColumn())
             case600();
-        else
-            case280();
+        else if (cellToLeftOfUsAlreadyChecked())
+            case600();
+        else {
+            if (isFirstRow())
+                case430();
+            else if (cellAboveUsAlreadyChecked())
+                case430();
+            else {
+                if (isLastColumn())
+                    case350();
+                else if (cellToOurRightAlreadyChecked())
+                    case350();
+                else {
+                    x = rnd(3);
+                    if (x == 1) {
+                        setCellToLeftAsBottomWall();
+                        case960();
+                    }
+                    else if (x == 2) {
+                        setCellAboveAsRightWall();
+                        case960();
+                    }
+                    else if (x == 3)
+                        case1020();
+                }
+            }
+        }
     }
 
     private static void moveToNextCell() {
