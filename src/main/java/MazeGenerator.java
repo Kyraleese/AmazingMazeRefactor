@@ -105,45 +105,6 @@ public class MazeGenerator {
         }
     }
 
-    private static void case880() {
-        if (!isLastRow())
-            if (cellBelowUsAlreadyChecked())
-                moveToNextCell();
-            else
-                case1090();
-        else if (z == 1)
-            moveToNextCell();
-        else {
-            q = 1;
-            case1090();
-        }
-    }
-
-    private static void case790() {
-        if (cannotProcessCellToOurRight())
-            case880();
-        else if (!isLastRow()) {
-            if (cellBelowUsAlreadyChecked())
-                case1020();
-            else {
-                x = rnd(2);
-                if (x == 1)
-                    case1020();
-                else if (x == 2)
-                    case1090();
-            }
-        }
-        else if (z == 1)
-            case1020();
-        else {
-            q = 1;
-            c++;
-            moveUpARow();
-            setCellToRightWall();
-            case960();
-        }
-    }
-
     private static void case760() {
         x = rnd(2);
         if (x == 1) {
@@ -152,24 +113,6 @@ public class MazeGenerator {
         }
         else if (x == 2)
             case1090();
-    }
-
-    private static void case720() {
-        if (!isLastRow())
-            if (cellBelowUsAlreadyChecked()) {
-                setCellAboveAsRightWall();
-                case960();
-            }
-            else
-                case760();
-        else if (z == 1) {
-            setCellAboveAsRightWall();
-            case960();
-        }
-        else {
-            q = 1;
-            case760();
-        }
     }
 
     private static void case700() {
@@ -195,10 +138,58 @@ public class MazeGenerator {
     }
 
     private static void case600() {
-        if (cannotProcessCellAboveUs())
-            case790();
-        else if (cannotProcessCellToOurRight())
-            case720();
+        if (cannotProcessCellAboveUs()) {
+            if (cannotProcessCellToOurRight()) {
+                if (!isLastRow())
+                    if (cellBelowUsAlreadyChecked())
+                        moveToNextCell();
+                    else
+                        case1090();
+                else if (z == 1)
+                    moveToNextCell();
+                else {
+                    q = 1;
+                    case1090();
+                }
+            }
+            else if (!isLastRow()) {
+                if (cellBelowUsAlreadyChecked())
+                    case1020();
+                else {
+                    x = rnd(2);
+                    if (x == 1)
+                        case1020();
+                    else if (x == 2)
+                        case1090();
+                }
+            }
+            else if (z == 1)
+                case1020();
+            else {
+                q = 1;
+                c++;
+                moveUpARow();
+                setCellToRightWall();
+                case960();
+            }
+        }
+        else if (cannotProcessCellToOurRight()) {
+            if (!isLastRow())
+                if (cellBelowUsAlreadyChecked()) {
+                    setCellAboveAsRightWall();
+                    case960();
+                }
+                else
+                    case760();
+            else if (z == 1) {
+                setCellAboveAsRightWall();
+                case960();
+            }
+            else {
+                q = 1;
+                case760();
+            }
+        }
         else if (!isLastRow()) {
             if (cellBelowUsAlreadyChecked())
                 case700();
@@ -223,24 +214,6 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case530() {
-        if (!isLastRow())
-            if (cellBelowUsAlreadyChecked()) {
-                setCellToLeftAsBottomWall();
-                case960();
-            }
-            else
-                case570();
-        else if (z == 1) {
-            setCellToLeftAsBottomWall();
-            case960();
-        }
-        else {
-            q = 1;
-            case570();
-        }
-    }
-
     private static void case510() {
         x = rnd(2);
         if (x == 1) {
@@ -261,23 +234,6 @@ public class MazeGenerator {
             case1020();
         else if (x == 3)
             case1090();
-    }
-
-    private static void case430() {
-        if (cannotProcessCellToOurRight())
-            case530();
-        else if (!isLastRow()) {
-            if (cellBelowUsAlreadyChecked())
-                case510();
-            else
-                case490();
-        }
-        else if (z == 1)
-            case510();
-        else {
-            q = 1;
-            case490();
-        }
     }
 
     private static void case410() {
@@ -307,27 +263,53 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case350() {
-        if (!isLastRow())
-            if (cellBelowUsAlreadyChecked())
-                case410();
-            else
-                case390();
-        else if (z == 1)
-            case410();
-        else {
-            q = 1;
-            case390();
-        }
-    }
-
     private static void beginProcessing() {
         if (cannotProcessCellToOurLeft())
             case600();
-        else if (cannotProcessCellAboveUs())
-            case430();
-        else if (cannotProcessCellToOurRight())
-            case350();
+        else if (cannotProcessCellAboveUs()) {
+            if (cannotProcessCellToOurRight()) {
+                if (!isLastRow())
+                    if (cellBelowUsAlreadyChecked()) {
+                        setCellToLeftAsBottomWall();
+                        case960();
+                    }
+                    else
+                        case570();
+                else if (z == 1) {
+                    setCellToLeftAsBottomWall();
+                    case960();
+                }
+                else {
+                    q = 1;
+                    case570();
+                }
+            }
+            else if (!isLastRow()) {
+                if (cellBelowUsAlreadyChecked())
+                    case510();
+                else
+                    case490();
+            }
+            else if (z == 1)
+                case510();
+            else {
+                q = 1;
+                case490();
+            }
+        }
+        else if (cannotProcessCellToOurRight()) {
+            if (!isLastRow())
+                if (cellBelowUsAlreadyChecked())
+                    case410();
+                else
+                    case390();
+            else if (z == 1)
+                case410();
+            else {
+                q = 1;
+                case390();
+            }
+        }
         else {
             x = rnd(3);
             if (x == 1) {
