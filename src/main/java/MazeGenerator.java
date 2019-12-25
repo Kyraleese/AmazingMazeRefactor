@@ -120,30 +120,27 @@ public class MazeGenerator {
     }
 
     private static void case790() {
-        if (isLastColumn())
+        if (cannotProcessCellToOurRight())
             case880();
-        else if (cellToOurRightAlreadyChecked())
-            case880();
-        else {
-            if (!isLastRow())
-                if (cellBelowUsAlreadyChecked())
-                    case1020();
-                else {
-                    x = rnd(2);
-                    if (x == 1)
-                        case1020();
-                    else if (x == 2)
-                        case1090();
-                }
-            else if (z == 1)
+        else if (!isLastRow()) {
+            if (cellBelowUsAlreadyChecked())
                 case1020();
             else {
-                q = 1;
-                c++;
-                moveUpARow();
-                setCellToRightWall();
-                case960();
+                x = rnd(2);
+                if (x == 1)
+                    case1020();
+                else if (x == 2)
+                    case1090();
             }
+        }
+        else if (z == 1)
+            case1020();
+        else {
+            q = 1;
+            c++;
+            moveUpARow();
+            setCellToRightWall();
+            case960();
         }
     }
 
