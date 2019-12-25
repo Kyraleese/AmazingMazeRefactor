@@ -82,8 +82,7 @@ public class MazeGenerator {
             }
 
             moveDownARow();
-            if (c < mazeHeight * mazeWidth + 1)
-                beginProcessing();
+            beginProcessingIfNotAllCellsVisited();
         }
     }
 
@@ -97,14 +96,6 @@ public class MazeGenerator {
         moveToNextColumnOfMaze();
         setCellAsVisited();
         continueIfNotAllCellsVisited();
-    }
-
-    private static boolean unvisitedCellsRemain() {
-        return c < mazeWidth * mazeHeight + 1;
-    }
-
-    private static void setCellToNoWalls() {
-        mazeGrid[column][row] = NO_WALLS;
     }
 
     private static void case990() {
@@ -606,9 +597,22 @@ public class MazeGenerator {
         mazeGrid[column][row] = RIGHT_WALL;
     }
 
+    private static void setCellToNoWalls() {
+        mazeGrid[column][row] = NO_WALLS;
+    }
+
+    private static boolean unvisitedCellsRemain() {
+        return c < mazeWidth * mazeHeight + 1;
+    }
+
     private static void continueIfNotAllCellsVisited() {
         if (unvisitedCellsRemain())
             case600();
+    }
+
+    private static void beginProcessingIfNotAllCellsVisited() {
+        if (unvisitedCellsRemain())
+            beginProcessing();
     }
 
     private static void setCellToLeftAsBottomWall() {
