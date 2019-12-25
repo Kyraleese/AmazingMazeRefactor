@@ -170,13 +170,6 @@ public class MazeGenerator {
             case1010();
     }
 
-    private static void case940() {
-        moveToPreviousColumnOfMaze();
-        setCellToBottomWall();
-        setCellAsVisited();
-        case960();
-    }
-
     private static void case910() {
         if (cellBelowUsAlreadyChecked())
             moveToNextCell();
@@ -367,17 +360,23 @@ public class MazeGenerator {
 
     private static void case570() {
         x = rnd(2);
-        if (x == 1)
-            case940();
+        if (x == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else if (x == 2)
             case1090();
-        else
-            case940();
+        else {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
     }
 
     private static void case560() {
-        if (cellBelowUsAlreadyChecked())
-            case940();
+        if (cellBelowUsAlreadyChecked()) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else
             case570();
     }
@@ -388,8 +387,10 @@ public class MazeGenerator {
     }
 
     private static void case540() {
-        if (z == 1)
-            case940();
+        if (z == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else
             case550();
     }
@@ -403,8 +404,10 @@ public class MazeGenerator {
 
     private static void case510() {
         x = rnd(2);
-        if (x == 1)
-            case940();
+        if (x == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else if (x == 2)
             case1020();
         else
@@ -413,8 +416,10 @@ public class MazeGenerator {
 
     private static void case490() {
         x = rnd(3);
-        if (x == 1)
-            case940();
+        if (x == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else if (x == 2)
             case1020();
         else if (x == 3)
@@ -470,8 +475,10 @@ public class MazeGenerator {
     private static void case410() {
         x = rnd(2);
 
-        if (x == 1)
-            case940();
+        if (x == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else if (x == 2)
             case980();
         else
@@ -480,8 +487,10 @@ public class MazeGenerator {
 
     private static void case390() {
         x = rnd(3);
-        if (x == 1)
-            case940();
+        if (x == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else if (x == 2)
             case980();
         else if (x == 3)
@@ -518,8 +527,10 @@ public class MazeGenerator {
 
     private static void case330() {
         x = rnd(3);
-        if (x == 1)
-            case940();
+        if (x == 1) {
+            setCellToLeftAsBottomWall();
+            case960();
+        }
         else if (x == 2)
             case980();
         else if (x == 3)
@@ -646,4 +657,9 @@ public class MazeGenerator {
         mazeGrid[column][row] = BOTTOM_WALL;
     }
 
+    private static void setCellToLeftAsBottomWall() {
+        moveToPreviousColumnOfMaze();
+        setCellToBottomWall();
+        setCellAsVisited();
+    }
 }
