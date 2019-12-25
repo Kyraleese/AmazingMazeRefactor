@@ -160,14 +160,11 @@ public class MazeGenerator {
         case990();
     }
 
-    private static void case1010() {
-        q = 0;
-        case270();
-    }
-
     private static void case960() {
-        if (c < mazeWidth * mazeHeight + 1)
-            case1010();
+        if (c < mazeWidth * mazeHeight + 1) {
+            q = 0;
+            case270();
+        }
     }
 
     private static void case910() {
