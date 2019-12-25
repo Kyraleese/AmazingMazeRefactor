@@ -13,6 +13,11 @@ public class Amazing {
     private static int[][] mazeCells;
     private static MazeGenerator generator;
 
+    private static int RIGHT_BOTTOM_CORNER = 0;
+    private static int RIGHT_WALL = 1;
+    private static int BOTTOM_WALL = 2;
+    private static int NO_WALLS = 3;
+
 
     private static void clear() {
         result.setLength(0);
@@ -33,7 +38,7 @@ public class Amazing {
         if (mazeWidth != 1 && mazeHeight != 1) {
             // 130:170
             for (int i = 1; i <= mazeWidth; i++) {
-                if (visitedCells[i][1] == 1)
+                if (visitedCells[i][1] == RIGHT_WALL)
                     print("+  ");
                 else
                     print("+--");
@@ -47,21 +52,27 @@ public class Amazing {
                 print("|");        // 1210
 
                 for (int i = 1; i <= mazeWidth; i++) {
-                    if (mazeCells[i][j] >= 2)
+                    if (mazeCells[i][j] == RIGHT_BOTTOM_CORNER)
+                        print("  |");
+                    if (mazeCells[i][j] == RIGHT_WALL)
+                        print("  |");
+                    else if (mazeCells[i][j] == BOTTOM_WALL)
                         print("   ");  // 1240
-                    else
-                        print("  |");  // 1260
+                    else if (mazeCells[i][j] == NO_WALLS)
+                        print("   ");  // 1240
                 }
 
                 print(" ");   // 1280
                 println();
 
                 for (int i = 1; i <= mazeWidth; i++) {
-                    if (mazeCells[i][j] == 0)
+                    if (mazeCells[i][j] == RIGHT_BOTTOM_CORNER)
                         print("+--");   // 1300, 1340
-                    else if (mazeCells[i][j] == 2)
+                    else if (mazeCells[i][j] == RIGHT_WALL)
+                        print("+  ");
+                    else if (mazeCells[i][j] == BOTTOM_WALL)
                         print("+--");  // 1310, 1340
-                    else
+                    else if (mazeCells[i][j] == NO_WALLS)
                         print("+  "); // 1320
                 }
 
