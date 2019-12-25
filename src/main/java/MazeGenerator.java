@@ -335,34 +335,24 @@ public class MazeGenerator {
     }
 
     private static void beginProcessing() {
-        if (isFirstColumn())
+        if (cannotProcessCellToOurLeft())
             case600();
-        else if (cellToLeftOfUsAlreadyChecked())
-            case600();
+        else if (cannotProcessCellAboveUs())
+            case430();
+        else if (cannotProcessCellToOurRight())
+            case350();
         else {
-            if (isFirstRow())
-                case430();
-            else if (cellAboveUsAlreadyChecked())
-                case430();
-            else {
-                if (isLastColumn())
-                    case350();
-                else if (cellToOurRightAlreadyChecked())
-                    case350();
-                else {
-                    x = rnd(3);
-                    if (x == 1) {
-                        setCellToLeftAsBottomWall();
-                        case960();
-                    }
-                    else if (x == 2) {
-                        setCellAboveAsRightWall();
-                        case960();
-                    }
-                    else if (x == 3)
-                        case1020();
-                }
+            x = rnd(3);
+            if (x == 1) {
+                setCellToLeftAsBottomWall();
+                case960();
             }
+            else if (x == 2) {
+                setCellAboveAsRightWall();
+                case960();
+            }
+            else if (x == 3)
+                case1020();
         }
     }
 
@@ -443,6 +433,18 @@ public class MazeGenerator {
 
     private static boolean cellToOurRightAlreadyChecked() {
         return visitedCells[column + 1][row] != 0;
+    }
+
+    private static boolean cannotProcessCellToOurRight() {
+        return isLastColumn() || cellToOurRightAlreadyChecked();
+    }
+
+    private static boolean cannotProcessCellAboveUs() {
+        return isFirstRow() || cellAboveUsAlreadyChecked();
+    }
+
+    private static boolean cannotProcessCellToOurLeft() {
+        return isFirstColumn() || cellToLeftOfUsAlreadyChecked();
     }
 
     private static void setCellAsVisited() {
