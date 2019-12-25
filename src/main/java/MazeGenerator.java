@@ -264,22 +264,19 @@ public class MazeGenerator {
     }
 
     private static void case430() {
-        if (isLastColumn())
+        if (cannotProcessCellToOurRight())
             case530();
-        else if (cellToOurRightAlreadyChecked())
-            case530();
-        else {
-            if (!isLastRow())
-                if (cellBelowUsAlreadyChecked())
-                    case510();
-                else
-                    case490();
-            else if (z == 1)
+        else if (!isLastRow()) {
+            if (cellBelowUsAlreadyChecked())
                 case510();
-            else {
-                q = 1;
+            else
                 case490();
-            }
+        }
+        else if (z == 1)
+            case510();
+        else {
+            q = 1;
+            case490();
         }
     }
 
