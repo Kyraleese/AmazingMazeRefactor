@@ -78,30 +78,19 @@ public class MazeGenerator {
         case1160();
     }
 
-    private static void case1130() {
-        moveDownARow();
-        if (c < mazeHeight * mazeWidth + 1)
-            case270();
-    }
-
-
-    private static void case1120() {
-        setCellToRightWall();
-        case1130();
-    }
-
-    private static void case1110() {
-        setCellToNoWalls();
-        case1130();
-    }
-
     private static void case1100() {
         visitedCells[column][row + 1] = c;
         c++;
-        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER)
-            case1120();
-        else
-            case1110();
+        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
+            setCellToRightWall();
+        }
+        else {
+            setCellToNoWalls();
+        }
+
+        moveDownARow();
+        if (c < mazeHeight * mazeWidth + 1)
+            case270();
     }
 
     private static void case1090() {
