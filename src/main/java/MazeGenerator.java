@@ -79,10 +79,11 @@ public class MazeGenerator {
     }
 
     private static void case1130() {
-        row++;
+        moveDownARow();
         if (c < mazeHeight * mazeWidth + 1)
             case270();
     }
+
 
     private static void case1120() {
         setCellToRightWall();
@@ -132,7 +133,7 @@ public class MazeGenerator {
 
     private static void case990() {
         c++;
-        moveToPriorRowOfMaze();
+        moveUpARow();
         setCellToRightWall();
         case960();
     }
@@ -587,8 +588,12 @@ public class MazeGenerator {
         row++;
     }
 
-    private static void moveToPriorRowOfMaze() {
+    private static void moveUpARow() {
         row--;
+    }
+
+    private static void moveDownARow() {
+        row++;
     }
 
     private static void moveToUpperLeftCornerOfMaze() {
@@ -641,7 +646,7 @@ public class MazeGenerator {
     }
 
     private static void setCellAboveAsRightWall() {
-        moveToPriorRowOfMaze();
+        moveUpARow();
         setCellToRightWall();
         setCellAsVisited();
     }
