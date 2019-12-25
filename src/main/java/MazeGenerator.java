@@ -176,8 +176,6 @@ public class MazeGenerator {
             case1020();
         else if (x == 2)
             case1090();
-        else
-            case1020();
     }
 
     private static void case840() {
@@ -228,10 +226,6 @@ public class MazeGenerator {
         }
         else if (x == 2)
             case1090();
-        else {
-            setCellAboveAsRightWall();
-            case960();
-        }
     }
 
     private static void case750() {
@@ -272,8 +266,6 @@ public class MazeGenerator {
         }
         else if (x == 2)
             case1020();
-        else
-            case720();
     }
 
     private static void case680() {
@@ -286,8 +278,6 @@ public class MazeGenerator {
             case1020();
         else if (x == 3)
             case1090();
-        else
-            case700();
     }
 
     private static void case670() {
@@ -352,10 +342,6 @@ public class MazeGenerator {
         }
         else if (x == 2)
             case1090();
-        else {
-            setCellToLeftAsBottomWall();
-            case960();
-        }
     }
 
     private static void case560() {
@@ -396,8 +382,6 @@ public class MazeGenerator {
         }
         else if (x == 2)
             case1020();
-        else
-            case530();
     }
 
     private static void case490() {
@@ -410,8 +394,6 @@ public class MazeGenerator {
             case1020();
         else if (x == 3)
             case1090();
-        else
-            case510();
     }
 
     private static void case480() {
@@ -454,10 +436,6 @@ public class MazeGenerator {
             case440();
     }
 
-    private static void case420() {
-
-    }
-
     private static void case410() {
         x = rnd(2);
 
@@ -469,8 +447,6 @@ public class MazeGenerator {
             setCellAboveAsRightWall();
             case960();
         }
-        else
-            case430();
     }
 
     private static void case390() {
@@ -485,8 +461,6 @@ public class MazeGenerator {
         }
         else if (x == 3)
             case1090();
-        else
-            case410();
     }
 
     private static void case380() {
@@ -527,8 +501,6 @@ public class MazeGenerator {
         }
         else if (x == 3)
             case1020();
-        else
-            case350();
     }
 
     private static void case320() {
