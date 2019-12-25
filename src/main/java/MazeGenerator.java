@@ -61,7 +61,7 @@ public class MazeGenerator {
     }
 
     private static void case1170() {
-        mazeGrid[column][row] = NO_WALLS;
+        setCellToNoWalls();
         q = 0;
         moveToNextCell();
     }
@@ -90,7 +90,7 @@ public class MazeGenerator {
     }
 
     private static void case1110() {
-        mazeGrid[column][row] = NO_WALLS;
+        setCellToNoWalls();
         case1130();
     }
 
@@ -110,38 +110,22 @@ public class MazeGenerator {
             case1100();
     }
 
-    private static void case1070() {
-        if (c < mazeWidth * mazeHeight + 1) {
-            case600();
-        }
-    }
-
-    private static void case1060() {
-        column++;
-        case1070();
-    }
-
-    private static void case1050() {
-        setCellToBottomWall();
-        case1060();
-    }
-
-    private static void case1040() {
-        mazeGrid[column][row] = NO_WALLS;
-        case1060();
-    }
-
-    private static void case1030() {
-        c++;
-        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER)
-            case1050();
-        else
-            case1040();
-    }
-
     private static void case1020() {
-        visitedCells[column + 1][row] = c;
-        case1030();
+        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER)
+            setCellToBottomWall();
+        else {
+            setCellToNoWalls();
+        }
+
+        moveToNextColumnOfMaze();
+        setCellAsVisited();
+
+        if (c < mazeWidth * mazeHeight + 1)
+            case600();
+    }
+
+    private static void setCellToNoWalls() {
+        mazeGrid[column][row] = NO_WALLS;
     }
 
     private static void case990() {
