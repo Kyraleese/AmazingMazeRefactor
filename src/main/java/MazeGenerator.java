@@ -54,7 +54,7 @@ public class MazeGenerator {
     }
 
     private static void case1180() {
-        mazeGrid[column][row] = RIGHT_WALL;
+        setCellToRightWall();
         q = 0;
         moveToUpperLeftCornerOfMaze();
         case260();
@@ -85,7 +85,7 @@ public class MazeGenerator {
     }
 
     private static void case1120() {
-        mazeGrid[column][row] = RIGHT_WALL;
+        setCellToRightWall();
         case1130();
     }
 
@@ -144,20 +144,11 @@ public class MazeGenerator {
         case1030();
     }
 
-    private static void case1000() {
-        mazeGrid[column][row - 1] = RIGHT_WALL;
-        row--;
-        case960();
-    }
-
     private static void case990() {
         c++;
-        case1000();
-    }
-
-    private static void case980() {
-        visitedCells[column][row - 1] = c;
-        case990();
+        moveToPriorRowOfMaze();
+        setCellToRightWall();
+        case960();
     }
 
     private static void case960() {
@@ -245,17 +236,23 @@ public class MazeGenerator {
 
     private static void case760() {
         x = rnd(2);
-        if (x == 1)
-            case980();
+        if (x == 1) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else if (x == 2)
             case1090();
-        else
-            case980();
+        else {
+            setCellAboveAsRightWall();
+            case960();
+        }
     }
 
     private static void case750() {
-        if (cellBelowUsAlreadyChecked())
-            case980();
+        if (cellBelowUsAlreadyChecked()) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else
             case760();
     }
@@ -266,8 +263,10 @@ public class MazeGenerator {
     }
 
     private static void case730() {
-        if (z == 1)
-            case980();
+        if (z == 1) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else
             case740();
     }
@@ -281,8 +280,10 @@ public class MazeGenerator {
 
     private static void case700() {
         x = rnd(2);
-        if (x == 1)
-            case980();
+        if (x == 1) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else if (x == 2)
             case1020();
         else
@@ -291,8 +292,10 @@ public class MazeGenerator {
 
     private static void case680() {
         x = rnd(3);
-        if (x == 1)
-            case980();
+        if (x == 1) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else if (x == 2)
             case1020();
         else if (x == 3)
@@ -476,8 +479,10 @@ public class MazeGenerator {
             setCellToLeftAsBottomWall();
             case960();
         }
-        else if (x == 2)
-            case980();
+        else if (x == 2) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else
             case430();
     }
@@ -488,8 +493,10 @@ public class MazeGenerator {
             setCellToLeftAsBottomWall();
             case960();
         }
-        else if (x == 2)
-            case980();
+        else if (x == 2) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else if (x == 3)
             case1090();
         else
@@ -528,8 +535,10 @@ public class MazeGenerator {
             setCellToLeftAsBottomWall();
             case960();
         }
-        else if (x == 2)
-            case980();
+        else if (x == 2) {
+            setCellAboveAsRightWall();
+            case960();
+        }
         else if (x == 3)
             case1020();
         else
@@ -620,6 +629,10 @@ public class MazeGenerator {
         row++;
     }
 
+    private static void moveToPriorRowOfMaze() {
+        row--;
+    }
+
     private static void moveToUpperLeftCornerOfMaze() {
         column = 1;
         row = 1;
@@ -654,9 +667,19 @@ public class MazeGenerator {
         mazeGrid[column][row] = BOTTOM_WALL;
     }
 
+    private static void setCellToRightWall() {
+        mazeGrid[column][row] = RIGHT_WALL;
+    }
+
     private static void setCellToLeftAsBottomWall() {
         moveToPreviousColumnOfMaze();
         setCellToBottomWall();
+        setCellAsVisited();
+    }
+
+    private static void setCellAboveAsRightWall() {
+        moveToPriorRowOfMaze();
+        setCellToRightWall();
         setCellAsVisited();
     }
 }
