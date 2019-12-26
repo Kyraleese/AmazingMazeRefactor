@@ -250,7 +250,7 @@ public class MazeGenerator {
         else if (onlyCellBelowUnchecked() && isNotLastRow()) {
             case1090();
         }
-        else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && z == 1)
+        else if (endOfPath() && z == 1)
             moveToNextCell();
         else if (onlyCellBelowUnchecked()){
             q = 1;
