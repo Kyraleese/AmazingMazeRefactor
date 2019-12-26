@@ -245,13 +245,11 @@ public class MazeGenerator {
     }
 
     private static void beginProcessing() {
-        if (isNotLastRow() && endOfPath())
+        if ((isNotLastRow() || z == 1) && endOfPath())
             moveToNextCell();
         else if (onlyCellBelowUnchecked() && isNotLastRow()) {
             case1090();
         }
-        else if (endOfPath() && z == 1)
-            moveToNextCell();
         else if (onlyCellBelowUnchecked()){
             q = 1;
             case1090();
