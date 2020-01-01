@@ -54,7 +54,7 @@ public class MazeGenerator {
     }
 
     private static void case1090() {
-        if (q == 1) {
+        if (isLastRow()) {
             z = 1;
             q = 0;
 
@@ -247,11 +247,7 @@ public class MazeGenerator {
     private static void beginProcessing() {
         if ((isNotLastRow() || z == 1) && endOfPath())
             moveToNextCell();
-        else if (onlyCellBelowUnchecked() && isNotLastRow()) {
-            case1090();
-        }
-        else if (onlyCellBelowUnchecked()){
-            q = 1;
+        else if (onlyCellBelowUnchecked()) {
             case1090();
         }
         else if ((isNotLastRow() || z == 1) && onlyCellToRightUnchecked())
@@ -366,6 +362,10 @@ public class MazeGenerator {
 
     private static boolean isNotLastRow() {
         return row < mazeHeight;
+    }
+
+    private static boolean isLastRow() {
+        return !isNotLastRow();
     }
 
     private static boolean isFirstRow() {
