@@ -6,7 +6,7 @@ public class MazeGenerator {
     private static int x;
     private static int mazeWidth;
     private static int mazeHeight;
-    private static int z;
+    private static int reachedLastRowAtLeastOnce;
     private static int row;
     private static int column;
     private static int c;
@@ -32,7 +32,7 @@ public class MazeGenerator {
         visitedCells = mazeVisitedCells;
         mazeGrid = mazeCells;
 
-        z = 0;
+        reachedLastRowAtLeastOnce = 0;
         int startingColumn = rnd(mazeWidth);
 
         c = 1;
@@ -53,7 +53,7 @@ public class MazeGenerator {
 
     private static void case1090() {
         if (isLastRow()) {
-            z = 1;
+            reachedLastRowAtLeastOnce = 1;
 
             if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
                 setCellToRightWall();
@@ -177,12 +177,12 @@ public class MazeGenerator {
     }
 
     private static void beginProcessing() {
-        if ((isNotLastRow() || z == 1) && endOfPath())
+        if ((isNotLastRow() || reachedLastRowAtLeastOnce == 1) && endOfPath())
             moveToNextCell();
         else if (onlyCellBelowUnchecked()) {
             case1090();
         }
-        else if ((isNotLastRow() || z == 1) && onlyCellToRightUnchecked())
+        else if ((isNotLastRow() || reachedLastRowAtLeastOnce == 1) && onlyCellToRightUnchecked())
             case1020();
         else if (onlyCellsToRightAndBelowUnchecked() && isNotLastRow()) {
             x = rnd(2);
@@ -197,11 +197,11 @@ public class MazeGenerator {
             setCellToRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellAboveUnchecked() && (isNotLastRow() || z == 1)) {
+        else if (onlyCellAboveUnchecked() && (isNotLastRow() || reachedLastRowAtLeastOnce == 1)) {
             setCellAboveAsRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellsToRightAndAboveUnchecked() && (isNotLastRow() || z == 1))
+        else if (onlyCellsToRightAndAboveUnchecked() && (isNotLastRow() || reachedLastRowAtLeastOnce == 1))
             case700();
         else if (cellToLeftOfUsAlreadyChecked())
             case680();
@@ -211,11 +211,11 @@ public class MazeGenerator {
         }
         else if (onlyCellsToLeftAndBelowUnchecked())
             case570();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && z == 1) {
+        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && reachedLastRowAtLeastOnce == 1) {
             setCellToLeftAsBottomWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || z == 1))
+        else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || reachedLastRowAtLeastOnce == 1))
             case510();
         else if (onlyCellAboveUsIsChecked() && isNotLastRow())
             case490();
