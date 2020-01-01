@@ -213,11 +213,8 @@ public class MazeGenerator {
         }
         else if (onlyCellsToLeftAndBelowUnchecked() && (isNotLastRow() || z == 1))
             case700();
-        else if (cellToLeftOfUsAlreadyChecked() && isNotLastRow())
+        else if (cellToLeftOfUsAlreadyChecked())
             case680();
-        else if (cellToLeftOfUsAlreadyChecked()){
-            case680();
-        }
         else if (onlyCellToLeftUnchecked() && isNotLastRow()) {
             setCellToLeftAsBottomWall();
             continueIfNotAllCellsVisited();
