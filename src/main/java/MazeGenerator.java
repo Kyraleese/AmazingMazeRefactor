@@ -55,7 +55,6 @@ public class MazeGenerator {
     private static void case1090() {
         if (isLastRow()) {
             z = 1;
-            q = 0;
 
             if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
                 setCellToRightWall();
