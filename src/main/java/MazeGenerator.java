@@ -95,16 +95,6 @@ public class MazeGenerator {
         continueIfNotAllCellsVisited();
     }
 
-    private static void case760() {
-        x = rnd(2);
-        if (x == 1) {
-            setCellAboveAsRightWall();
-            continueIfNotAllCellsVisited();
-        }
-        else if (x == 2)
-            case1090();
-    }
-
     private static void case700() {
         x = rnd(2);
         if (x == 1) {
