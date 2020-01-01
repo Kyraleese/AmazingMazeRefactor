@@ -155,7 +155,7 @@ public class MazeGenerator {
 
     private static void beginProcessing() {
         if ((isNotLastRow() || exitCellCreated == 1) && endOfPath())
-            moveToNextCell();
+            moveToNextCheckedCell();
         else if (onlyCellBelowUnchecked()) {
             case1090();
         }
@@ -166,7 +166,7 @@ public class MazeGenerator {
             if (x == 1)
                 case1020();
             else if (x == 2)
-                case1090();
+                setCellToRightWallOrNoWallsAndMoveDown();
             }
         else if (onlyCellToRightUnchecked()){
             c++;
@@ -218,8 +218,7 @@ public class MazeGenerator {
         }
     }
 
-
-    private static void moveToNextCell() {
+    private static void moveToNextCheckedCell() {
         if (!isLastColumn()) {
             moveToNextColumnOfMaze();
         }
@@ -231,7 +230,7 @@ public class MazeGenerator {
         }
 
         if (currentCellUnchecked())
-            moveToNextCell();
+            moveToNextCheckedCell();
         else
             beginProcessing();
     }
@@ -394,7 +393,7 @@ public class MazeGenerator {
             setCellToRightWall();
             moveToUpperLeftCornerOfMaze();
             if (currentCellUnchecked()) {
-                moveToNextCell();
+                moveToNextCheckedCell();
             }
             else {
                 beginProcessing();
@@ -402,7 +401,7 @@ public class MazeGenerator {
         }
         else {
             setCellToNoWalls();
-            moveToNextCell();
+            moveToNextCheckedCell();
         }
     }
 
