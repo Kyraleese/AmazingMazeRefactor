@@ -211,8 +211,6 @@ public class MazeGenerator {
             setCellAboveAsRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (cellToLeftOfUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && isNotLastRow() && !cellAboveUsAlreadyChecked() && !cellBelowUsAlreadyChecked())
-            case760();
         else if (cellToLeftOfUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked())
             case700();
         else if (cellToLeftOfUsAlreadyChecked() && isNotLastRow())
