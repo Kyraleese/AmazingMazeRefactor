@@ -56,16 +56,7 @@ public class MazeGenerator {
             createExitCell();
         }
         else {
-            if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
-                setCellToRightWall();
-            }
-            else {
-                setCellToNoWalls();
-            }
-
-            moveDownARow();
-            setCellAsVisited();
-            continueIfNotAllCellsVisited();
+            setCellToRightWallOrNoWallsAndMoveDown();
         }
     }
 
@@ -413,6 +404,18 @@ public class MazeGenerator {
             setCellToNoWalls();
             moveToNextCell();
         }
+    }
 
+    private static void setCellToRightWallOrNoWallsAndMoveDown() {
+        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
+            setCellToRightWall();
+        }
+        else {
+            setCellToNoWalls();
+        }
+
+        moveDownARow();
+        setCellAsVisited();
+        continueIfNotAllCellsVisited();
     }
 }
