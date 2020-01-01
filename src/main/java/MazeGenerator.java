@@ -211,11 +211,11 @@ public class MazeGenerator {
             setCellAboveAsRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (cellToLeftOfUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked())
+        else if (cellToLeftOfUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked() && !cellAboveUsAlreadyChecked() && !cellToRightOfUsAlreadyChecked())
             case700();
         else if (cellToLeftOfUsAlreadyChecked() && isNotLastRow())
             case680();
-        else if (cellToLeftOfUsAlreadyChecked() && z == 1)
+        else if (cellToLeftOfUsAlreadyChecked() && z == 1 && cellBelowUsAlreadyChecked() && !cellAboveUsAlreadyChecked() && !cellToRightOfUsAlreadyChecked())
             case700();
         else if (cellToLeftOfUsAlreadyChecked()){
             case680();
