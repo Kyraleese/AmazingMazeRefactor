@@ -254,7 +254,7 @@ public class MazeGenerator {
             q = 1;
             case1090();
         }
-        else if (onlyCellToRightUnchecked() && isNotLastRow())
+        else if ((isNotLastRow() || z == 1) && onlyCellToRightUnchecked())
             case1020();
         else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked() && isNotLastRow()) {
             x = rnd(2);
@@ -263,8 +263,6 @@ public class MazeGenerator {
             else if (x == 2)
                 case1090();
             }
-        else if (onlyCellToRightUnchecked() && z == 1)
-            case1020();
         else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked()){
             q = 1;
             c++;
