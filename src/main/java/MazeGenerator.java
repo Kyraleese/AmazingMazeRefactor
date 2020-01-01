@@ -33,7 +33,6 @@ public class MazeGenerator {
         visitedCells = mazeVisitedCells;
         mazeGrid = mazeCells;
 
-        q = 0;
         z = 0;
         int startingColumn = rnd(mazeWidth);
 
