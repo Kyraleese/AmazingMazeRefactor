@@ -256,14 +256,14 @@ public class MazeGenerator {
         }
         else if ((isNotLastRow() || z == 1) && onlyCellToRightUnchecked())
             case1020();
-        else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked() && isNotLastRow()) {
+        else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked()  && !cellBelowUsAlreadyChecked() && !cellToRightOfUsAlreadyChecked() && isNotLastRow()) {
             x = rnd(2);
             if (x == 1)
                 case1020();
             else if (x == 2)
                 case1090();
             }
-        else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked()){
+        else if (onlyCellToRightUnchecked()){
             q = 1;
             c++;
             moveUpARow();
