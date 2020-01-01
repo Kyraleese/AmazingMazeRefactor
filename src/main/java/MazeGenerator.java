@@ -6,7 +6,6 @@ public class MazeGenerator {
     private static int x;
     private static int mazeWidth;
     private static int mazeHeight;
-    private static int q;
     private static int z;
     private static int row;
     private static int column;
