@@ -56,8 +56,6 @@ public class MazeGenerator {
             createExitCell();
         }
         else {
-            visitedCells[column][row + 1] = c;
-            c++;
             if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
                 setCellToRightWall();
             }
@@ -66,6 +64,7 @@ public class MazeGenerator {
             }
 
             moveDownARow();
+            setCellAsVisited();
             continueIfNotAllCellsVisited();
         }
     }
