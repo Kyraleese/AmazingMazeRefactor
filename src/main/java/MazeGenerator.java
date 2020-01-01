@@ -263,7 +263,7 @@ public class MazeGenerator {
             else if (x == 2)
                 case1090();
             }
-        else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked() && !cellToRightOfUsAlreadyChecked() && cellBelowUsAlreadyChecked() && z == 1)
+        else if (onlyCellToRightUnchecked() && z == 1)
             case1020();
         else if (cellToLeftOfUsAlreadyChecked() && cellAboveUsAlreadyChecked()){
             q = 1;
