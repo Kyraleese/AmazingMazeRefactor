@@ -128,57 +128,6 @@ public class MazeGenerator {
             case1090();
     }
 
-    private static void case600() {
-        if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked())
-            moveToNextCell();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && isNotLastRow())
-            case1090();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && z == 1)
-            moveToNextCell();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked()){
-            case1090();
-        }
-        else if (cellAboveUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked())
-            case1020();
-        else if (cellAboveUsAlreadyChecked() && isNotLastRow()) {
-            x = rnd(2);
-            if (x == 1)
-                case1020();
-            else if (x == 2)
-                case1090();
-        }
-        else if (cellAboveUsAlreadyChecked() && z == 1)
-            case1020();
-        else if (cellAboveUsAlreadyChecked()){
-            c++;
-            moveUpARow();
-            setCellToRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
-        }
-        else if (cellToRightOfUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked()) {
-            setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
-        }
-        else if (cellToRightOfUsAlreadyChecked() && isNotLastRow())
-            case760();
-        else if (cellToRightOfUsAlreadyChecked() && z == 1) {
-            setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
-        }
-        else if (cellToRightOfUsAlreadyChecked()){
-            case760();
-        }
-        else if (isNotLastRow() && cellBelowUsAlreadyChecked())
-            case700();
-        else if (isNotLastRow())
-            case680();
-        else if (z == 1)
-            case700();
-        else {
-            case680();
-        }
-    }
-
     private static void case570() {
         x = rnd(2);
         if (x == 1) {
@@ -453,7 +402,7 @@ public class MazeGenerator {
 
     private static void continueIfNotAllCellsVisited() {
         if (unvisitedCellsRemain())
-            case600();
+            beginProcessing();
     }
 
     private static void beginProcessingIfNotAllCellsVisited() {
