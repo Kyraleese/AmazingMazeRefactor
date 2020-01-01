@@ -399,6 +399,7 @@ public class MazeGenerator {
     }
 
     private static void createExitCell() {
+        exitCellCreated = 1;
         if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
             setCellToRightWall();
             moveToUpperLeftCornerOfMaze();
@@ -414,6 +415,5 @@ public class MazeGenerator {
             moveToNextCell();
         }
 
-        exitCellCreated = 1;
     }
 }
