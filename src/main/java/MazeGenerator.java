@@ -219,14 +219,11 @@ public class MazeGenerator {
             setCellToLeftAsBottomWall();
             continueIfNotAllCellsVisited();
         }
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && isNotLastRow())
+        else if (onlyCellsToRightAndAboveUnchecked())
             case570();
         else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && z == 1) {
             setCellToLeftAsBottomWall();
             continueIfNotAllCellsVisited();
-        }
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked()) {
-            case570();
         }
         else if (cellAboveUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked())
             case510();
@@ -366,6 +363,10 @@ public class MazeGenerator {
 
     private static boolean onlyCellsToLeftAndBelowUnchecked() {
         return cellToLeftOfUsAlreadyChecked() && cellBelowUsAlreadyChecked() && !cellAboveUsAlreadyChecked() && !cellToRightOfUsAlreadyChecked();
+    }
+
+    private static boolean onlyCellsToRightAndAboveUnchecked() {
+        return cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && !cellToLeftOfUsAlreadyChecked() && !cellBelowUsAlreadyChecked();
     }
 
     private static void setCellAsVisited() {
