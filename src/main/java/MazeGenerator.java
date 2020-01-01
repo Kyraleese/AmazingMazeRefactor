@@ -411,9 +411,7 @@ public class MazeGenerator {
     }
 
     private static void beginProcessingAndSetQToZeroIfNotAllCellsVisited() {
-        if (unvisitedCellsRemain()) {
-            beginProcessing();
-        }
+        beginProcessingIfNotAllCellsVisited();
     }
 
     private static void setCellToLeftAsBottomWall() {
