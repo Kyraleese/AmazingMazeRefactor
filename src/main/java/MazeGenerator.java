@@ -100,7 +100,7 @@ public class MazeGenerator {
         x = rnd(2);
         if (x == 1) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2)
             case1090();
@@ -110,7 +110,7 @@ public class MazeGenerator {
         x = rnd(2);
         if (x == 1) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2)
             case1020();
@@ -120,7 +120,7 @@ public class MazeGenerator {
         x = rnd(3);
         if (x == 1) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2)
             case1020();
@@ -132,7 +132,7 @@ public class MazeGenerator {
         x = rnd(2);
         if (x == 1) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2)
             case1090();
@@ -142,7 +142,7 @@ public class MazeGenerator {
         x = rnd(2);
         if (x == 1) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2)
             case1020();
@@ -152,7 +152,7 @@ public class MazeGenerator {
         x = rnd(3);
         if (x == 1) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2)
             case1020();
@@ -165,11 +165,11 @@ public class MazeGenerator {
 
         if (x == 1) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
     }
 
@@ -177,11 +177,11 @@ public class MazeGenerator {
         x = rnd(3);
         if (x == 1) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 2) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (x == 3)
             case1090();
@@ -206,17 +206,17 @@ public class MazeGenerator {
             c++;
             moveUpARow();
             setCellToRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (onlyCellAboveUnchecked() && isNotLastRow()) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (cellToLeftOfUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && isNotLastRow())
             case760();
         else if (cellToLeftOfUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && z == 1) {
             setCellAboveAsRightWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (cellToLeftOfUsAlreadyChecked() && cellToRightOfUsAlreadyChecked()){
             case760();
@@ -232,13 +232,13 @@ public class MazeGenerator {
         }
         else if (onlyCellToLeftUnchecked() && isNotLastRow()) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && isNotLastRow())
             case570();
         else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && z == 1) {
             setCellToLeftAsBottomWall();
-            beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+            beginProcessingIfNotAllCellsVisited();
         }
         else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked()) {
             case570();
@@ -265,11 +265,11 @@ public class MazeGenerator {
             x = rnd(3);
             if (x == 1) {
                 setCellToLeftAsBottomWall();
-                beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+                beginProcessingIfNotAllCellsVisited();
             }
             else if (x == 2) {
                 setCellAboveAsRightWall();
-                beginProcessingAndSetQToZeroIfNotAllCellsVisited();
+                beginProcessingIfNotAllCellsVisited();
             }
             else if (x == 3)
                 case1020();
@@ -408,10 +408,6 @@ public class MazeGenerator {
     private static void beginProcessingIfNotAllCellsVisited() {
         if (unvisitedCellsRemain())
             beginProcessing();
-    }
-
-    private static void beginProcessingAndSetQToZeroIfNotAllCellsVisited() {
-        beginProcessingIfNotAllCellsVisited();
     }
 
     private static void setCellToLeftAsBottomWall() {
