@@ -236,13 +236,8 @@ public class MazeGenerator {
         }
         else if (cellToRightOfUsAlreadyChecked() && isNotLastRow() && cellBelowUsAlreadyChecked())
             case410();
-        else if (cellToRightOfUsAlreadyChecked() && isNotLastRow())
+        else if (cellToRightOfUsAlreadyChecked())
             case390();
-        else if (cellToRightOfUsAlreadyChecked() && z == 1)
-            case410();
-        else if (cellToRightOfUsAlreadyChecked()){
-            case390();
-        }
         else {
             x = rnd(3);
             if (x == 1) {
