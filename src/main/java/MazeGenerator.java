@@ -6,7 +6,7 @@ public class MazeGenerator {
     private static int x;
     private static int mazeWidth;
     private static int mazeHeight;
-    private static int reachedLastRowAtLeastOnce;
+    private static int exitCellCreated;
     private static int row;
     private static int column;
     private static int c;
@@ -32,7 +32,7 @@ public class MazeGenerator {
         visitedCells = mazeVisitedCells;
         mazeGrid = mazeCells;
 
-        reachedLastRowAtLeastOnce = 0;
+        exitCellCreated = 0;
         int startingColumn = rnd(mazeWidth);
 
         c = 1;
@@ -53,20 +53,7 @@ public class MazeGenerator {
 
     private static void case1090() {
         if (isLastRow()) {
-            reachedLastRowAtLeastOnce = 1;
-
-            if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
-                setCellToRightWall();
-                moveToUpperLeftCornerOfMaze();
-                if (currentCellUnchecked())
-                    moveToNextCell();
-                else
-                    beginProcessing();
-            }
-            else {
-                setCellToNoWalls();
-                moveToNextCell();
-            }
+            createExitCell();
         }
         else {
             visitedCells[column][row + 1] = c;
@@ -177,12 +164,12 @@ public class MazeGenerator {
     }
 
     private static void beginProcessing() {
-        if ((isNotLastRow() || reachedLastRowAtLeastOnce == 1) && endOfPath())
+        if ((isNotLastRow() || exitCellCreated == 1) && endOfPath())
             moveToNextCell();
         else if (onlyCellBelowUnchecked()) {
             case1090();
         }
-        else if ((isNotLastRow() || reachedLastRowAtLeastOnce == 1) && onlyCellToRightUnchecked())
+        else if ((isNotLastRow() || exitCellCreated == 1) && onlyCellToRightUnchecked())
             case1020();
         else if (onlyCellsToRightAndBelowUnchecked() && isNotLastRow()) {
             x = rnd(2);
@@ -197,11 +184,11 @@ public class MazeGenerator {
             setCellToRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellAboveUnchecked() && (isNotLastRow() || reachedLastRowAtLeastOnce == 1)) {
+        else if (onlyCellAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1)) {
             setCellAboveAsRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellsToRightAndAboveUnchecked() && (isNotLastRow() || reachedLastRowAtLeastOnce == 1))
+        else if (onlyCellsToRightAndAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1))
             case700();
         else if (cellToLeftOfUsAlreadyChecked())
             case680();
@@ -211,11 +198,11 @@ public class MazeGenerator {
         }
         else if (onlyCellsToLeftAndBelowUnchecked())
             case570();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && reachedLastRowAtLeastOnce == 1) {
+        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && exitCellCreated == 1) {
             setCellToLeftAsBottomWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || reachedLastRowAtLeastOnce == 1))
+        else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || exitCellCreated == 1))
             case510();
         else if (onlyCellAboveUsIsChecked() && isNotLastRow())
             case490();
@@ -409,5 +396,24 @@ public class MazeGenerator {
         moveUpARow();
         setCellToRightWall();
         setCellAsVisited();
+    }
+
+    private static void createExitCell() {
+        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
+            setCellToRightWall();
+            moveToUpperLeftCornerOfMaze();
+            if (currentCellUnchecked()) {
+                moveToNextCell();
+            }
+            else {
+                beginProcessing();
+            }
+        }
+        else {
+            setCellToNoWalls();
+            moveToNextCell();
+        }
+
+        exitCellCreated = 1;
     }
 }
