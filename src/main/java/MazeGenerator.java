@@ -146,7 +146,7 @@ public class MazeGenerator {
     }
 
     private static void processCurrentCell() {
-        if ((isNotLastRow() || exitCellCreated == 1) && endOfPath())
+        if (endOfPath())
             moveToNextCheckedCell();
         else if ((isNotLastRow() || exitCellCreated == 1) && onlyCellToRightUnchecked())
             case1020();
