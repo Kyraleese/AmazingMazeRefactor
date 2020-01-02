@@ -148,7 +148,7 @@ public class MazeGenerator {
     private static void processCurrentCell() {
         if (endOfPath())
             moveToNextCheckedCell();
-        else if ((isNotLastRow() || exitCellCreated == 1) && onlyCellToRightUnchecked())
+        else if (onlyCellToRightUnchecked() && (isNotLastRow() || exitCellCreated == 1))
             case1020();
         else if (onlyCellAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1)) {
             setCellAboveAsRightWall();
@@ -157,6 +157,9 @@ public class MazeGenerator {
             case700();
         else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || exitCellCreated == 1))
             case510();
+        else if (onlyCellToLeftUnchecked() && (isNotLastRow() || exitCellCreated == 1)) {
+            setCellToLeftAsBottomWall();
+        }
         else if (onlyCellBelowUnchecked()) {
             setCellToRightWallOrNoWallsAndMoveDown();
         }
@@ -167,9 +170,6 @@ public class MazeGenerator {
             else if (x == 2)
                 setCellToRightWallOrNoWallsAndMoveDown();
             }
-        else if (onlyCellToLeftUnchecked() && isNotLastRow()) {
-            setCellToLeftAsBottomWall();
-        }
         else if (onlyCellAboveUsIsChecked() && isNotLastRow())
             case490();
         else if (onlyCellsToLeftAndAboveUnchecked() && isNotLastRow())
@@ -183,9 +183,6 @@ public class MazeGenerator {
             case680();
         else if (onlyCellsToLeftAndBelowUnchecked())
             case570();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && exitCellCreated == 1) {
-            setCellToLeftAsBottomWall();
-        }
         else if (onlyCellsToLeftAndRightUnchecked() && isLastRow()) {
             case490();
         }
