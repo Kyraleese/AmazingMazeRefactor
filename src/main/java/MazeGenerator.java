@@ -49,7 +49,7 @@ public class MazeGenerator {
 
     static void generate() {
         while(unvisitedCellsRemain()) {
-            beginProcessing();
+            processCurrentCell();
         }
     }
 
@@ -145,7 +145,7 @@ public class MazeGenerator {
             setCellToRightWallOrNoWallsAndMoveDown();
     }
 
-    private static void beginProcessing() {
+    private static void processCurrentCell() {
         if ((isNotLastRow() || exitCellCreated == 1) && endOfPath())
             moveToNextCheckedCell();
         else if ((isNotLastRow() || exitCellCreated == 1) && onlyCellToRightUnchecked())
@@ -218,7 +218,7 @@ public class MazeGenerator {
         if (currentCellUnchecked())
             moveToNextCheckedCell();
         else
-            beginProcessing();
+            processCurrentCell();
     }
 
     private static boolean isLastColumn() {
@@ -377,7 +377,7 @@ public class MazeGenerator {
                 moveToNextCheckedCell();
             }
             else {
-                beginProcessing();
+                processCurrentCell();
             }
         }
         else {
