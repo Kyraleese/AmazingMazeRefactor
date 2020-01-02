@@ -156,11 +156,19 @@ public class MazeGenerator {
     private static void beginProcessing() {
         if ((isNotLastRow() || exitCellCreated == 1) && endOfPath())
             moveToNextCheckedCell();
+        else if ((isNotLastRow() || exitCellCreated == 1) && onlyCellToRightUnchecked())
+            case1020();
+        else if (onlyCellAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1)) {
+            setCellAboveAsRightWall();
+            continueIfNotAllCellsVisited();
+        }
+        else if (onlyCellsToRightAndAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1))
+            case700();
+        else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || exitCellCreated == 1))
+            case510();
         else if (onlyCellBelowUnchecked()) {
             setCellToRightWallOrNoWallsAndMoveDown();
         }
-        else if ((isNotLastRow() || exitCellCreated == 1) && onlyCellToRightUnchecked())
-            case1020();
         else if (onlyCellsToRightAndBelowUnchecked() && isNotLastRow()) {
             x = rnd(2);
             if (x == 1)
@@ -168,39 +176,27 @@ public class MazeGenerator {
             else if (x == 2)
                 setCellToRightWallOrNoWallsAndMoveDown();
             }
+        else if (onlyCellToLeftUnchecked() && isNotLastRow()) {
+            setCellToLeftAsBottomWall();
+            continueIfNotAllCellsVisited();
+        }
+        else if (onlyCellAboveUsIsChecked() && isNotLastRow())
+            case490();
+        else if (onlyCellsToLeftAndAboveUnchecked() && isNotLastRow())
+            case410();
         else if (onlyCellToRightUnchecked()){
             c++;
             moveUpARow();
             setCellToRightWall();
             continueIfNotAllCellsVisited();
         }
-        else if (onlyCellAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1)) {
-            setCellAboveAsRightWall();
-            continueIfNotAllCellsVisited();
-        }
-        else if (onlyCellsToRightAndAboveUnchecked() && (isNotLastRow() || exitCellCreated == 1))
-            case700();
         else if (cellToLeftOfUsAlreadyChecked())
             case680();
-        else if (onlyCellToLeftUnchecked() && isNotLastRow()) {
-            setCellToLeftAsBottomWall();
-            continueIfNotAllCellsVisited();
-        }
         else if (onlyCellsToLeftAndBelowUnchecked())
             case570();
-        else if (cellAboveUsAlreadyChecked() && cellToRightOfUsAlreadyChecked() && exitCellCreated == 1) {
-            setCellToLeftAsBottomWall();
-            continueIfNotAllCellsVisited();
-        }
-        else if (onlyCellsToLeftAndRightUnchecked() && (isNotLastRow() || exitCellCreated == 1))
-            case510();
-        else if (onlyCellAboveUsIsChecked() && isNotLastRow())
-            case490();
         else if (onlyCellsToLeftAndRightUnchecked() && isLastRow()) {
             case490();
         }
-        else if (onlyCellsToLeftAndAboveUnchecked() && isNotLastRow())
-            case410();
         else if (onlyCellToRightIsChecked())
             case390();
         else {
