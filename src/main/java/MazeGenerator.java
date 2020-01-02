@@ -370,20 +370,12 @@ public class MazeGenerator {
 
     private static void createExitCell() {
         exitCellCreated = 1;
-        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER) {
+        if (mazeGrid[column][row] == RIGHT_BOTTOM_CORNER)
             setCellToRightWall();
-            moveToUpperLeftCornerOfMaze();
-            if (currentCellUnchecked()) {
-                moveToNextCheckedCell();
-            }
-            else {
-                processCurrentCell();
-            }
-        }
-        else {
+        else
             setCellToNoWalls();
-            moveToNextCheckedCell();
-        }
+
+        moveToNextCheckedCell();
     }
 
     private static void setCellToRightWallOrNoWallsAndMoveDown() {
